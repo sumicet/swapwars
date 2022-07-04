@@ -14,17 +14,44 @@ body {
     height: 100%;
 }
 
-* {
-    box-sizing: border-box;
-    margin: 0px;
-    padding: 0px;
-    border: 0px;
+@font-face {
+    font-family: 'KantumruyPro';
+    font-weight: 700;
+    src: local('KantumruyPro'), url(./assets/font/KantumruyPro-Bold.ttf) format('truetype');
 }
 
-a {
-    text-decoration: none;
+@font-face {
+    font-family: 'KantumruyPro';
+    font-weight: 600;
+    src: local('KantumruyPro'), url(./assets/font/KantumruyPro-SemiBold.ttf) format('truetype');
 }
 
-ul {
-    list-style-type: none;
+@font-face {
+    font-family: 'KantumruyPro';
+    font-weight: 500;
+    src: local('KantumruyPro'), url(./assets/font/KantumruyPro-Medium.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'KantumruyPro';
+    font-weight: 400;
+    src: local('KantumruyPro'), url(./assets/font/KantumruyPro-Regular.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'KantumruyPro';
+    font-weight: 300;
+    src: local('KantumruyPro'), url(./assets/font/KantumruyPro-Light.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'KantumruyPro';
+    font-weight: 200;
+    src: local('KantumruyPro'), url(./assets/font/KantumruyPro-ExtraLight.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'KantumruyPro';
+    font-weight: 100;
+    src: local('KantumruyPro'), url(./assets/font/KantumruyPro-Thin.ttf) format('truetype');
 }

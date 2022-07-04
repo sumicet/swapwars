@@ -1,6 +1,5 @@
 import { BigNumber, ethers } from 'ethers';
-import Web3 from 'web3';
-import { useContract } from './hooks/useContract';
+import { useContract } from '../hooks/useContract';
 
 const PPM = 1000000;
 const decimals = BigNumber.from(18);
