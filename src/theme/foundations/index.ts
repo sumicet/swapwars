@@ -7,6 +7,7 @@ import { sizes } from './sizes';
 import { breakpoints } from './breakpoints';
 import { zIndices } from './z-index';
 import { shadows } from './shadows';
+import { transition } from './transitions';
 
 export const foundations = {
     colors,
@@ -18,4 +19,5 @@ export const foundations = {
     breakpoints,
     zIndices,
     shadows,
+    transition,
 };

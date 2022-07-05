@@ -1,21 +1,23 @@
-import { Container, Flex, VStack } from '@chakra-ui/layout';
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/tabs';
+import { Flex } from '@chakra-ui/layout';
+import { Tab, TabIndicator, TabList, TabPanel, TabPanels, Tabs } from '../components/Tabs';
 import { SwapWidget } from '../components/SwapWidget';
+import { FaucetWidget } from '../components/FaucetWidget';
 
 export function Home() {
     return (
         <Flex flex={1} align='center' justify='center' width='100%'>
-            <Tabs variant='unstyled'>
+            <Tabs isLazy position='relative'>
                 <TabList>
-                    <Tab _selected={{ color: 'white', bg: 'blue.500' }}>Tab 1</Tab>
-                    <Tab _selected={{ color: 'white', bg: 'green.400' }}>Tab 2</Tab>
+                    <Tab>Exchange</Tab>
+                    <Tab>Faucet</Tab>
                 </TabList>
+                <TabIndicator />
                 <TabPanels>
                     <TabPanel>
                         <SwapWidget />
                     </TabPanel>
                     <TabPanel>
-                        <SwapWidget />
+                        <FaucetWidget />
                     </TabPanel>
                 </TabPanels>
             </Tabs>

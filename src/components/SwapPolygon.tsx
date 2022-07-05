@@ -1,12 +1,13 @@
 import Icon from '@chakra-ui/icon';
+import { Image } from '@chakra-ui/image';
 import { Box, BoxProps, Flex } from '@chakra-ui/layout';
 import { FiRepeat } from 'react-icons/fi';
-import { PolygonIcon } from './PolygonIcon';
+import purplePolygon from '../assets/images/purplePolygon.png';
 
 export function SwapPolygon(props: BoxProps) {
     return (
         <Box {...props} position='relative'>
-            <PolygonIcon />
+            <Image src={purplePolygon} alt='swap' boxSize='50px' objectFit='contain' />
             <Flex
                 position='absolute'
                 top='50%'
