@@ -8,6 +8,12 @@ export const Button: ComponentStyleConfig = {
         width: '100%',
         textStyle: 'large',
         color: 'primary.light',
-        boxShadow: 'button',
+        boxShadow: 'buttonOrange',
+    },
+    variants: {
+        purple: {
+            bg: 'accent.purple',
+            boxShadow: 'buttonPurple',
+        },
     },
 };

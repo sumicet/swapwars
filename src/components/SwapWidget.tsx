@@ -27,7 +27,7 @@ export function SwapWidget() {
 
     return (
         <WidgetWrapper>
-            <WidgetTitle title='Exchange' subtitle='Ratio 2:1' />
+            <WidgetTitle title='Pool #0' subtitle='Ratio 2:1' />
             <WidgetBodyWrapper>
                 <Field
                     label='You send'

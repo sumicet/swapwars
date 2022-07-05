@@ -24,7 +24,7 @@ export const Tabs: ComponentStyleConfig = {
             top: 0,
             height: tabHeight,
             borderRadius: 'radius14',
-            transitionDuration: 'fast',
+            transitionDuration: 'fast', // This also fixed the transition bug where the first tab change isn't animated
         },
         tabpanels: {
             mt: 'space20',

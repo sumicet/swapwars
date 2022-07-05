@@ -18,12 +18,7 @@ export function FaucetWidget() {
                 subtitle="You're about to receive some tokens to test the app"
             />
             <WidgetBodyWrapper>
-                <Field
-                    label='Token'
-                    value='10'
-                    // onChange={event => handleChange('in', event)}
-                    placeholder='10'
-                />
+                <Field label='Token' value='10' placeholder='10' isDisabled />
 
                 <WidgetIcon icon={FiChevronsDown} />
 
@@ -38,7 +33,7 @@ export function FaucetWidget() {
                     Have fun!
                 </Text>
             </WidgetBodyWrapper>
-            <Button>Send</Button>
+            <Button variant='purple'>Send</Button>
         </WidgetWrapper>
     );
 }
