@@ -6,6 +6,7 @@ import { WidgetBodyWrapper } from './Widget/WidgetBodyWrapper';
 import { WidgetIcon } from './Widget/WidgetIcon';
 import { WidgetTitle } from './Widget/WidgetTitle';
 import { WidgetWrapper } from './Widget/WidgetWrapper';
+import { FiRepeat } from 'react-icons/fi';
 
 interface Amount {
     in: string;
@@ -35,7 +36,7 @@ export function SwapWidget() {
                     placeholder='10'
                 />
 
-                <WidgetIcon />
+                <WidgetIcon icon={FiRepeat} rotateIcon />
 
                 <Field
                     label='You receive'

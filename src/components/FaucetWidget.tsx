@@ -6,6 +6,7 @@ import { WidgetBodyWrapper } from './Widget/WidgetBodyWrapper';
 import { WidgetIcon } from './Widget/WidgetIcon';
 import { WidgetTitle } from './Widget/WidgetTitle';
 import { WidgetWrapper } from './Widget/WidgetWrapper';
+import { FiChevronsDown } from 'react-icons/fi';
 
 export function FaucetWidget() {
     const [walletAddress, setWalletAddress] = useState<string>('');
@@ -24,7 +25,7 @@ export function FaucetWidget() {
                     placeholder='10'
                 />
 
-                <WidgetIcon />
+                <WidgetIcon icon={FiChevronsDown} />
 
                 <Field
                     label='Wallet address'
