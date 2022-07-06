@@ -2,16 +2,34 @@ import { Button } from '@chakra-ui/button';
 import { Text } from '@chakra-ui/layout';
 import { useState } from 'react';
 import { Field } from './Field';
-import { WidgetBodyWrapper } from './Widget/WidgetBodyWrapper';
-import { WidgetIcon } from './Widget/WidgetIcon';
-import { WidgetTitle } from './Widget/WidgetTitle';
-import { WidgetWrapper } from './Widget/WidgetWrapper';
+import { WidgetBodyWrapper, WidgetIcon, WidgetTitle, WidgetWrapper } from './Widget';
 import { FiRepeat } from 'react-icons/fi';
+import { Select } from './Select';
 
 interface Amount {
     in: string;
     out: string;
 }
+
+interface Options {
+    label: string;
+    value: string;
+}
+
+const options: Options[] = [
+    {
+        label: 'GROGU',
+        value: 'GROGU',
+    },
+    {
+        label: 'MANDO',
+        value: 'MANDO',
+    },
+    {
+        label: 'JAWA',
+        value: 'JAWA',
+    },
+];
 
 export function SwapWidget() {
     const [amount, setAmount] = useState<Amount>({ in: '', out: '' });
@@ -34,7 +52,9 @@ export function SwapWidget() {
                     value={amount.in}
                     onChange={event => handleChange('in', event)}
                     placeholder='10'
-                />
+                >
+                    <Select options={options} isSearchable={false} hideSelectedOptions />
+                </Field>
 
                 <WidgetIcon icon={FiRepeat} rotateIcon />
 

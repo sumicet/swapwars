@@ -13,8 +13,18 @@ export function Field({ label, children, ...props }: FieldProps) {
             <Text variant='small' color='primary.dark'>
                 {label}
             </Text>
-            <HStack width='100%'>
-                {children}
+            <HStack
+                width='100%'
+                spacing={0}
+                borderRadius='radius40'
+                bg='bg.dark'
+                _focusVisible={{ bg: 'bg.darkHover' }}
+            >
+                {children && (
+                    <Flex padding='space10' width='100%' height='100%'>
+                        {children}
+                    </Flex>
+                )}
                 <Input
                     type='number'
                     variant={children ? 'halfRound' : undefined}

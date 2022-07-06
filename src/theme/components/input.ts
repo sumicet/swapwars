@@ -6,12 +6,11 @@ export const Input: MultiStyleConfig = {
             borderRadius: 'radius40',
             paddingX: 'space40',
             paddingY: 'space30',
-            bg: 'bg.dark',
             color: 'primary.light',
             textStyle: 'medium',
+            bg: 'transparent',
             _focusVisible: {
                 outline: 0,
-                bg: 'bg.darkHover',
             },
             _placeholder: {
                 color: 'primary.medium',

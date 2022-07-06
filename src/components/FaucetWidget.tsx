@@ -2,10 +2,7 @@ import { Button } from '@chakra-ui/button';
 import { Text } from '@chakra-ui/layout';
 import { useState } from 'react';
 import { Field } from './Field';
-import { WidgetBodyWrapper } from './Widget/WidgetBodyWrapper';
-import { WidgetIcon } from './Widget/WidgetIcon';
-import { WidgetTitle } from './Widget/WidgetTitle';
-import { WidgetWrapper } from './Widget/WidgetWrapper';
+import { WidgetBodyWrapper, WidgetIcon, WidgetTitle, WidgetWrapper } from './Widget';
 import { FiChevronsDown } from 'react-icons/fi';
 
 export function FaucetWidget() {

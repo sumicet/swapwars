@@ -10,6 +10,7 @@ export const colors = {
         light: '#343552',
         darkHover: '#1A1B30',
         lightHover: '#424467',
+        border: 'rgb(141, 141, 185, 0.2)',
     },
     accent: {
         purple: 'linear-gradient(137.29deg, #5D3EFF, #5B3DF6)',
