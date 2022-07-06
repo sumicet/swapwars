@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Field } from './Field';
 import { WidgetBodyWrapper, WidgetIcon, WidgetTitle, WidgetWrapper } from './Widget';
 import { FiChevronsDown } from 'react-icons/fi';
+import { SelectToken } from './SelectToken';
 
 export function FaucetWidget() {
     const [walletAddress, setWalletAddress] = useState<string>('');
@@ -15,7 +16,9 @@ export function FaucetWidget() {
                 subtitle="You're about to receive some tokens to test the app"
             />
             <WidgetBodyWrapper>
-                <Field label='Token' value='10' placeholder='10' isDisabled />
+                <Field label='Token' value='10' placeholder='10' isDisabled>
+                    <SelectToken />
+                </Field>
 
                 <WidgetIcon icon={FiChevronsDown} />
 
@@ -27,7 +30,7 @@ export function FaucetWidget() {
                 />
 
                 <Text color='primary.medium' variant='small'>
-                    Have fun!
+                    Have fun~
                 </Text>
             </WidgetBodyWrapper>
             <Button variant='purple'>Send</Button>

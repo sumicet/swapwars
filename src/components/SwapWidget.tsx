@@ -5,31 +5,12 @@ import { Field } from './Field';
 import { WidgetBodyWrapper, WidgetIcon, WidgetTitle, WidgetWrapper } from './Widget';
 import { FiRepeat } from 'react-icons/fi';
 import { Select } from './Select';
+import { SelectToken } from './SelectToken';
 
 interface Amount {
     in: string;
     out: string;
 }
-
-interface Options {
-    label: string;
-    value: string;
-}
-
-const options: Options[] = [
-    {
-        label: 'GROGU',
-        value: 'GROGU',
-    },
-    {
-        label: 'MANDO',
-        value: 'MANDO',
-    },
-    {
-        label: 'JAWA',
-        value: 'JAWA',
-    },
-];
 
 export function SwapWidget() {
     const [amount, setAmount] = useState<Amount>({ in: '', out: '' });
@@ -53,7 +34,7 @@ export function SwapWidget() {
                     onChange={event => handleChange('in', event)}
                     placeholder='10'
                 >
-                    <Select options={options} isSearchable={false} hideSelectedOptions />
+                    <SelectToken />
                 </Field>
 
                 <WidgetIcon icon={FiRepeat} rotateIcon />
