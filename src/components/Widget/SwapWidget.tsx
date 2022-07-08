@@ -1,11 +1,11 @@
 import { Button } from '@chakra-ui/button';
 import { Text } from '@chakra-ui/layout';
-import { useState } from 'react';
-import { Field } from './Field';
-import { WidgetBodyWrapper, WidgetIcon, WidgetTitle, WidgetWrapper } from './Widget';
+import { FormEvent, useState } from 'react';
+import { Field } from '../Field';
+import { WidgetBodyWrapper, WidgetIcon, WidgetTitle, WidgetWrapper } from '.';
 import { FiRepeat } from 'react-icons/fi';
-import { Select } from './Select';
-import { SelectToken } from './SelectToken';
+import { SelectToken } from '../SelectToken';
+import { tokens, Tokens } from './types';
 
 interface Amount {
     in: string;
@@ -24,17 +24,31 @@ export function SwapWidget() {
         }
     };
 
+    const [first, setFirst] = useState<Tokens>();
+    const [second, setSecond] = useState<Tokens>();
+    const optionsFirst = tokens.filter(value => value?.value !== second?.value);
+    const optionsSecond = tokens.filter(value => value?.value !== first?.value);
+
+    const buttonText =
+        !first || !second
+            ? 'Select a token'
+            : !amount.in || !amount.out
+            ? 'Select an amount'
+            : 'Swap';
+
     return (
         <WidgetWrapper>
             <WidgetTitle title='Pool #0' subtitle='Ratio 2:1' />
+
             <WidgetBodyWrapper>
                 <Field
                     label='You send'
                     value={amount.in}
                     onChange={event => handleChange('in', event)}
                     placeholder='10'
+                    type='number'
                 >
-                    <SelectToken />
+                    <SelectToken<Tokens> value={first} onChange={setFirst} options={optionsFirst} />
                 </Field>
 
                 <WidgetIcon icon={FiRepeat} rotateIcon />
@@ -44,13 +58,20 @@ export function SwapWidget() {
                     value={amount.out}
                     onChange={event => handleChange('out', event)}
                     placeholder='5'
-                />
+                    type='number'
+                >
+                    <SelectToken<Tokens>
+                        value={second}
+                        onChange={setSecond}
+                        options={optionsSecond}
+                    />
+                </Field>
 
                 <Text color='primary.medium' variant='small'>
                     Slippage: 0.1
                 </Text>
             </WidgetBodyWrapper>
-            <Button>Swap</Button>
+            <Button isDisabled={buttonText !== 'Swap'}>{buttonText}</Button>
         </WidgetWrapper>
     );
 }

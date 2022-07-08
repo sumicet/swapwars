@@ -1,6 +1,6 @@
 import { Box, BoxProps } from '@chakra-ui/layout';
 import { useToken } from '@chakra-ui/system';
-import { Polygon, PolygonProps } from '../Polygon';
+import { Polygon, PolygonProps } from '../../Polygon';
 
 type WidgetIconProps = BoxProps & Pick<PolygonProps, 'icon' | 'rotateIcon'>;
 

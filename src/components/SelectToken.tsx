@@ -1,25 +1,51 @@
-import { Select } from "./Select";
+import { Image } from '@chakra-ui/image';
+import { ControlProps, GroupBase, chakraComponents, OptionProps, Props } from 'chakra-react-select';
+import { Select } from './Select';
 
-interface Options {
-    label: string;
-    value: string;
+import { HStack, Text } from '@chakra-ui/layout';
+
+function Control<Options>({ children, ...rest }: ControlProps<Options, false, GroupBase<Options>>) {
+    const { selectProps } = rest;
+    const { value } = selectProps;
+
+    return (
+        <chakraComponents.Control {...rest}>
+            <HStack width='100%' alignItems='center' spacing='space10'>
+                {value && <Image src={selectProps.value?.image} boxSize='icon.medium' />}
+                {children}
+            </HStack>
+        </chakraComponents.Control>
+    );
 }
 
-const options: Options[] = [
-    {
-        label: 'GROGU',
-        value: 'GROGU',
-    },
-    {
-        label: 'MANDO',
-        value: 'MANDO',
-    },
-    {
-        label: 'JAWA',
-        value: 'JAWA',
-    },
-];
+function Option<Options extends unknown>({
+    children,
+    ...rest
+}: OptionProps<Options, false, GroupBase<Options>>) {
+    const { data } = rest;
 
-export function SelectToken() {
-    return <Select options={options} isSearchable={false} hideSelectedOptions />
+    return (
+        <chakraComponents.Option {...rest}>
+            <HStack width='100%' alignItems='center' spacing='space10'>
+                <Image src={data?.image} boxSize='icon.medium' />
+                <Text>{data?.label}</Text>
+            </HStack>
+        </chakraComponents.Option>
+    );
+}
+
+export function SelectToken<Options extends unknown>(
+    props: Props<Options, false, GroupBase<Options>>
+) {
+    return (
+        <Select
+            {...props}
+            isSearchable={false}
+            hideSelectedOptions
+            components={{
+                Control,
+                Option,
+            }}
+        />
+    );
 }

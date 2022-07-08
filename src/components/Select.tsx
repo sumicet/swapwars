@@ -15,6 +15,7 @@ export function Select<
                     width: '100%',
                     height: '100%',
                     borderRadius: 0,
+                    cursor: 'pointer',
                 }),
                 control: (provider, state) => ({
                     ...provider,
@@ -22,6 +23,9 @@ export function Select<
                     width: '100%',
                     borderRadius: 'radius29',
                     bg: 'bg.light',
+                    _groupHover: {
+                        bg: 'bg.lightHover',
+                    },
                     borderBottomRadius: state.menuIsOpen ? 0 : 'radius29',
                     padding: 'space20',
                     borderBottom: '1px solid',
@@ -29,7 +33,7 @@ export function Select<
                 }),
                 menu: (provider, state) => ({
                     ...provider,
-                    bg: 'bg.light',
+                    // bg: 'bg.light',
                     mt: 0,
                     textStyle: 'medium',
                     color: 'primary.medium',
@@ -46,6 +50,9 @@ export function Select<
                 menuList: (provider, state) => ({
                     ...provider,
                     bg: 'bg.light',
+                    _groupHover: {
+                        bg: 'bg.lightHover',
+                    },
                     paddingX: 'space20',
                     paddingY: 'space10',
                 }),

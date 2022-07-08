@@ -9,29 +9,35 @@ interface FieldProps extends InputProps {
 
 export function Field({ label, children, ...props }: FieldProps) {
     return (
-        <VStack spacing='space8' align='flex-start' width='100%'>
+        <VStack spacing='space8' align='flex-start' width='100%' role='group'>
             <Text variant='small' color='primary.dark'>
                 {label}
             </Text>
             <HStack
                 width='100%'
-                spacing={0}
+                spacing='space30'
                 borderRadius='radius40'
                 bg='bg.dark'
+                _groupHover={{
+                    bg: 'bg.darkHover',
+                }}
                 _focusVisible={{ bg: 'bg.darkHover' }}
             >
                 {children && (
-                    <Flex padding='space10' width='100%' height='100%'>
-                        {children}
+                    <Flex flex={1}>
+                        <Flex paddingLeft='space10' width='100%'>
+                            {children}
+                        </Flex>
                     </Flex>
                 )}
-                <Input
-                    type='number'
-                    variant={children ? 'halfRound' : undefined}
-                    width='100%'
-                    textAlign='end'
-                    {...props}
-                />
+                <Flex flex={1} height='100%'>
+                    <Input
+                        variant={children ? 'halfRound' : undefined}
+                        textAlign='end'
+                        width='100%'
+                        {...props}
+                    />
+                </Flex>
             </HStack>
         </VStack>
     );

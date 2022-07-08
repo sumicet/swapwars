@@ -1,4 +1,3 @@
-export * from './WidgetBodyWrapper';
-export * from './WidgetIcon';
-export * from './WidgetTitle';
-export * from './WidgetWrapper';
+export * from './components';
+export * from './FaucetWidget';
+export * from './SwapWidget';

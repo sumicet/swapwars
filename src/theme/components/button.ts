@@ -9,6 +9,13 @@ export const Button: ComponentStyleConfig = {
         textStyle: 'large',
         color: 'primary.light',
         boxShadow: 'buttonOrange',
+
+        _disabled: {
+            bg: 'bg.light',
+            boxShadow: 'none',
+            color: 'primary.medium',
+            cursor: 'default',
+        },
     },
     variants: {
         purple: {
