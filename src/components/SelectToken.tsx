@@ -11,6 +11,8 @@ function Control<Options>({ children, ...rest }: ControlProps<Options, false, Gr
     return (
         <chakraComponents.Control {...rest}>
             <HStack width='100%' alignItems='center' spacing='space10'>
+                {/* TODO: Remove this */}
+                {/* @ts-ignore */}
                 {value && <Image src={selectProps.value?.image} boxSize='icon.medium' />}
                 {children}
             </HStack>
@@ -27,7 +29,9 @@ function Option<Options extends unknown>({
     return (
         <chakraComponents.Option {...rest}>
             <HStack width='100%' alignItems='center' spacing='space10'>
+                {/* @ts-ignore */}
                 <Image src={data?.image} boxSize='icon.medium' />
+                {/* @ts-ignore */}
                 <Text>{data?.label}</Text>
             </HStack>
         </chakraComponents.Option>
