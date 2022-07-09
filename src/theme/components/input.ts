@@ -1,6 +1,8 @@
-import { MultiStyleConfig } from '@chakra-ui/theme-tools';
+import { ComponentStyleConfig } from '@chakra-ui/theme';
 
-export const Input: MultiStyleConfig = {
+// https://chakra-ui.com/docs/components/input/usage
+
+export const Input: ComponentStyleConfig = {
     baseStyle: {
         field: {
             borderRadius: 'radius40',

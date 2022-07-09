@@ -9,6 +9,8 @@ import { zIndices } from './z-index';
 import { shadows } from './shadows';
 import { transition } from './transitions';
 
+// https://github.com/chakra-ui/chakra-ui/tree/main/packages/theme/src/foundations
+
 export const foundations = {
     colors,
     space,

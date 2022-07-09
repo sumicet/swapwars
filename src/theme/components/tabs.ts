@@ -1,6 +1,6 @@
 import { ComponentStyleConfig } from '@chakra-ui/theme';
 
-const tabHeight = 64;
+// https://chakra-ui.com/docs/components/tabs/usage
 
 export const Tabs: ComponentStyleConfig = {
     baseStyle: props => ({
@@ -10,7 +10,7 @@ export const Tabs: ComponentStyleConfig = {
             _selected: {
                 color: 'primary.light',
             },
-            height: tabHeight,
+            height: 'tabs.height',
             width: '100%',
             zIndex: 1,
         },
@@ -22,7 +22,7 @@ export const Tabs: ComponentStyleConfig = {
             bg: 'bg.light',
             position: 'absolute',
             top: 0,
-            height: tabHeight,
+            height: 'tabs.height',
             borderRadius: 'radius14',
             transitionDuration: 'fast', // This also fixed the transition bug where the first tab change isn't animated
         },

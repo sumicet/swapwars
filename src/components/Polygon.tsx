@@ -11,6 +11,12 @@ export interface PolygonProps extends BoxProps {
     rotateIcon?: boolean;
 }
 
+/**
+ * @param icon The icon component
+ * @param rotateIcon Rotate the icon 90 deg
+ *
+ * A polygon with an `Icon` in the middle
+ */
 export function Polygon({ icon, rotateIcon = false, ...rest }: PolygonProps) {
     return (
         <Box {...rest} position='relative'>

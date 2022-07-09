@@ -3,6 +3,8 @@ import { forwardRef, useMultiStyleConfig } from '@chakra-ui/system';
 import { TabIndicatorProps, useTabIndicator } from '@chakra-ui/tabs';
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/tabs';
 
+// https://chakra-ui.com/docs/components/tabs/usage
+
 const TabIndicator = forwardRef<TabIndicatorProps, 'div'>((props, ref) => {
     const indicatorStyle = useTabIndicator();
 
@@ -10,8 +12,6 @@ const TabIndicator = forwardRef<TabIndicatorProps, 'div'>((props, ref) => {
         ...props.style,
         ...indicatorStyle,
     };
-
-    console.log(indicatorStyle);
 
     const styles = useMultiStyleConfig('Tabs', props);
 

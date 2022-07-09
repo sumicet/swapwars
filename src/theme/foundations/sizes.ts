@@ -7,5 +7,8 @@ export const sizes = {
         medium: '19px',
     },
     widget: '514px',
+    tabs: {
+        height: '64px',
+    },
     ...space,
 };

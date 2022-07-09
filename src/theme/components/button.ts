@@ -1,5 +1,7 @@
 import { ComponentStyleConfig } from '@chakra-ui/theme';
 
+// https://chakra-ui.com/docs/components/button/usage
+
 export const Button: ComponentStyleConfig = {
     baseStyle: {
         bg: 'accent.orange',

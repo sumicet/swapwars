@@ -1,5 +1,7 @@
 import { MultiStyleConfig } from '@chakra-ui/theme-tools';
 
+// https://chakra-ui.com/docs/components/popover/usage
+
 export const Popover: MultiStyleConfig = {
     baseStyle: {
         content: {

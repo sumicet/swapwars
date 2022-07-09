@@ -7,7 +7,10 @@ interface FieldProps extends InputProps {
     children?: ReactNode;
 }
 
-export function Field({ label, children, ...props }: FieldProps) {
+/**
+ * Displays an `Input` on the right and `children` on the left
+ */
+export function Field({ label, children, ...rest }: FieldProps) {
     return (
         <VStack spacing='space8' align='flex-start' width='100%' role='group'>
             <Text variant='small' color='primary.dark'>
@@ -35,7 +38,7 @@ export function Field({ label, children, ...props }: FieldProps) {
                         variant={children ? 'halfRound' : undefined}
                         textAlign='end'
                         width='100%'
-                        {...props}
+                        {...rest}
                     />
                 </Flex>
             </HStack>
