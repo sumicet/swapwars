@@ -1,4 +1,5 @@
 import { ComponentStyleConfig } from '@chakra-ui/theme';
+import { mode } from '@chakra-ui/theme-tools';
 
 // https://chakra-ui.com/docs/components/tabs/usage
 
@@ -6,20 +7,20 @@ export const Tabs: ComponentStyleConfig = {
     baseStyle: props => ({
         tab: {
             textStyle: 'extraLarge',
-            color: 'primary.medium',
+            color: mode('light.secondary', 'dark.secondary')(props),
             _selected: {
-                color: 'primary.light',
+                color: mode('light.bg.secondary', 'dark.tertiary')(props),
             },
             height: 'tabs.height',
             width: '100%',
             zIndex: 1,
         },
         tablist: {
-            bg: 'bg.medium',
+            bg: mode('light.bg.secondary', 'dark.bg.secondary')(props),
             borderRadius: 'radius14',
         },
         indicator: {
-            bg: 'bg.light',
+            bg: mode('accent.purple', 'dark.bg.tertiary')(props),
             position: 'absolute',
             top: 0,
             height: 'tabs.height',

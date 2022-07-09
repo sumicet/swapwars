@@ -6,6 +6,7 @@ import { WidgetBodyWrapper, WidgetIcon, WidgetTitle, WidgetWrapper } from '.';
 import { FiRepeat } from 'react-icons/fi';
 import { SelectToken } from '../SelectToken';
 import { tokens, Tokens } from './types';
+import { useColorModeValue } from '@chakra-ui/system';
 
 interface Amount {
     in: string;
@@ -28,6 +29,8 @@ export function SwapWidget() {
     const [second, setSecond] = useState<Tokens>();
     const optionsFirst = tokens.filter(value => value?.value !== second?.value);
     const optionsSecond = tokens.filter(value => value?.value !== first?.value);
+
+    const textColor = useColorModeValue('light.secondary', 'dark.secondary');
 
     const buttonText =
         !first || !second
@@ -67,7 +70,7 @@ export function SwapWidget() {
                     />
                 </Field>
 
-                <Text color='primary.medium' variant='small'>
+                <Text color={textColor} variant='small'>
                     Slippage: 0.1
                 </Text>
             </WidgetBodyWrapper>

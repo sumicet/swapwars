@@ -22,11 +22,9 @@ export function useSelectStyles<
             ...provider,
             ...style.control,
             borderBottomRadius: state.menuIsOpen ? 0 : 'radius29',
-            borderColor: state.menuIsOpen ? 'bg.border' : 'transparent',
+            borderColor: state.menuIsOpen ? 'dark.bg.border' : 'transparent',
         }),
     };
-
-    console.log(styles);
 
     return styles;
 }

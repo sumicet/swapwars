@@ -1,5 +1,6 @@
 import { Input, InputProps } from '@chakra-ui/input';
 import { Flex, HStack, Text, VStack } from '@chakra-ui/layout';
+import { useColorModeValue } from '@chakra-ui/system';
 import { ReactNode } from 'react';
 
 interface FieldProps extends InputProps {
@@ -11,20 +12,29 @@ interface FieldProps extends InputProps {
  * Displays an `Input` on the right and `children` on the left
  */
 export function Field({ label, children, ...rest }: FieldProps) {
+    const labelColor = useColorModeValue('light.primary', 'dark.primary');
+    const bgColor = useColorModeValue('transparent', 'dark.bg.primary');
+    const bgOutline = useColorModeValue(
+        { outline: '1px solid', outlineColor: 'light.bg.primary' },
+        {}
+    );
+    const bgHover = useColorModeValue('light.bg.primary', 'dark.bg.hover.primary');
+
     return (
         <VStack spacing='space8' align='flex-start' width='100%' role='group'>
-            <Text variant='small' color='primary.dark'>
+            <Text variant='small' color={labelColor}>
                 {label}
             </Text>
             <HStack
                 width='100%'
                 spacing='space30'
                 borderRadius='radius40'
-                bg='bg.dark'
+                bg={bgColor}
+                {...bgOutline}
                 _groupHover={{
-                    bg: 'bg.darkHover',
+                    bg: bgHover,
                 }}
-                _focusVisible={{ bg: 'bg.darkHover' }}
+                _focusVisible={{ bg: bgHover }}
             >
                 {children && (
                     <Flex flex={1}>

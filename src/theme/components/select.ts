@@ -1,11 +1,12 @@
 import { ComponentStyleConfig } from '@chakra-ui/theme';
+import { mode } from '@chakra-ui/theme-tools';
 import { chakraReactSelectComponents } from '../../utils';
 
 // https://github.com/csandman/chakra-react-select
 
 export const Select: ComponentStyleConfig = {
     parts: chakraReactSelectComponents,
-    baseStyle: {
+    baseStyle: props => ({
         container: {
             width: '100%',
             height: '100%',
@@ -16,30 +17,33 @@ export const Select: ComponentStyleConfig = {
             height: '100%',
             width: '100%',
             borderRadius: 'radius29',
-            bg: 'bg.light',
+            bg: mode('light.bg.primary', 'dark.bg.tertiary')(props),
             _groupHover: {
-                bg: 'bg.lightHover',
+                bg: mode('light.bg.secondary', 'dark.bg.hover.tertiary')(props),
             },
             padding: 'space20',
             borderBottom: '1px solid',
+            borderColor: mode('transparent', 'dark.bg.border')(props),
         },
         menu: {
             mt: 0,
             textStyle: 'medium',
-            color: 'primary.medium',
+            color: mode('light.tertiary', 'dark.secondary')(props),
             borderBottomRadius: 'radius29',
+            outline: mode('1px solid', 'none')(props),
+            outlineColor: mode('light.bg.primary', 'transparent')(props),
         },
         option: {
             _hover: {
-                color: 'primary.light',
+                color: mode('light.secondary', 'dark.tertiary')(props),
             },
             paddingY: 'space10',
             paddingX: 0,
         },
         menuList: {
-            bg: 'bg.light',
+            bg: mode('light.bg.primary', 'dark.bg.tertiary')(props),
             _groupHover: {
-                bg: 'bg.lightHover',
+                bg: mode('light.bg.secondary', 'dark.bg.hover.tertiary')(props),
             },
             paddingX: 'space20',
             paddingY: 'space10',
@@ -51,5 +55,5 @@ export const Select: ComponentStyleConfig = {
         valueContainer: {
             padding: 0,
         },
-    },
+    }),
 };

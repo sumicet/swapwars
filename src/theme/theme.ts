@@ -7,7 +7,7 @@ export const theme = {
     ...foundations,
     config: {
         useSystemColorMode: true,
-        initialColorMode: 'light',
+        initialColorMode: 'dark',
         cssVarPrefix: 'picker',
     } as ThemeConfig,
 };

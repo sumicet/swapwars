@@ -37,7 +37,7 @@ export function Polygon({ icon, rotateIcon = false, ...rest }: PolygonProps) {
                 >
                     <Icon
                         as={icon}
-                        color='primary.light'
+                        color='dark.tertiary'
                         boxSize='icon.small'
                         transform={`${rotateIcon ? 'rotate(90deg)' : ''}`}
                     />

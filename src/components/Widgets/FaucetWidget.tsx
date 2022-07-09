@@ -6,11 +6,14 @@ import { FiChevronsDown } from 'react-icons/fi';
 import { SelectToken } from '../SelectToken';
 import { tokens, Tokens } from './types';
 import { Text } from '@chakra-ui/layout';
+import { useColorModeValue } from '@chakra-ui/system';
 
 export function FaucetWidget() {
     const [token, setToken] = useState<Tokens>();
 
     const buttonText = !token ? 'Select a token' : 'Send';
+
+    const textColor = useColorModeValue('light.secondary', 'dark.secondary');
 
     return (
         <WidgetWrapper>
@@ -31,7 +34,7 @@ export function FaucetWidget() {
                     placeholder='10'
                     isDisabled
                 />
-                <Text color='primary.medium' variant='small'>
+                <Text color={textColor} variant='small'>
                     Have fun!
                 </Text>
             </WidgetBodyWrapper>
