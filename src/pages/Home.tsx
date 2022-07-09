@@ -1,7 +1,14 @@
 import { Flex } from '@chakra-ui/layout';
-import { Tab, TabIndicator, TabList, TabPanel, TabPanels, Tabs } from '../components/Tabs';
-import { SwapWidget } from '../components/Widgets/SwapWidget';
-import { FaucetWidget } from '../components/Widgets/FaucetWidget';
+import {
+    Tab,
+    TabIndicator,
+    TabList,
+    TabPanel,
+    TabPanels,
+    Tabs,
+    SwapWidget,
+    FaucetWidget,
+} from '../components';
 import { AnimatePresence } from 'framer-motion';
 
 export function Home() {
