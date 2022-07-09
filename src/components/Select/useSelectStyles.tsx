@@ -1,5 +1,6 @@
-import { ThemingProps, useMultiStyleConfig } from '@chakra-ui/system';
+import { CSSObject, ThemingProps, useMultiStyleConfig } from '@chakra-ui/system';
 import { ChakraStylesConfig, GroupBase } from 'chakra-react-select';
+import { chakraReactSelectComponents } from '../../utils';
 
 export function useSelectStyles<
     Option,
@@ -9,37 +10,23 @@ export function useSelectStyles<
     const style = useMultiStyleConfig('Select', props);
 
     const styles: ChakraStylesConfig<Option, IsMulti, Group> | undefined = {
-        container: provider => ({
-            ...provider,
-            ...style.container,
-        }),
+        ...chakraReactSelectComponents
+            .map((component: string) => ({
+                [component]: (provider: CSSObject) => ({
+                    ...provider,
+                    ...(style[component] || {}),
+                }),
+            }))
+            .reduce((prev, curr) => ({ ...prev, ...curr }), {}),
         control: (provider, state) => ({
             ...provider,
             ...style.control,
             borderBottomRadius: state.menuIsOpen ? 0 : 'radius29',
             borderColor: state.menuIsOpen ? 'bg.border' : 'transparent',
         }),
-        menu: provider => ({
-            ...provider,
-            ...style.menu,
-        }),
-        option: provider => ({
-            ...provider,
-            ...style.option,
-        }),
-        menuList: provider => ({
-            ...provider,
-            ...style.menuList,
-        }),
-        singleValue: provider => ({
-            ...provider,
-            ...style.singleValue,
-        }),
-        valueContainer: provider => ({
-            ...provider,
-            ...style.valueContainer,
-        }),
     };
+
+    console.log(styles);
 
     return styles;
 }

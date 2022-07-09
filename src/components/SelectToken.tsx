@@ -1,6 +1,6 @@
 import { Image } from '@chakra-ui/image';
 import { ControlProps, GroupBase, chakraComponents, OptionProps, Props } from 'chakra-react-select';
-import { Select } from './Select';
+import { Select } from './Select/Select';
 
 import { HStack, Text } from '@chakra-ui/layout';
 

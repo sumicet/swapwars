@@ -1,6 +1,6 @@
 import { ThemingProps } from '@chakra-ui/system';
 import { GroupBase, Props, Select as ChakraReactSelect } from 'chakra-react-select';
-import { useSelectStyles } from './Select/useSelectStyles';
+import { useSelectStyles } from './useSelectStyles';
 
 export type SelectProps<
     Option,

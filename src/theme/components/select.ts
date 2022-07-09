@@ -1,11 +1,10 @@
 import { ComponentStyleConfig } from '@chakra-ui/theme';
-import { chakraComponents } from 'chakra-react-select';
-import lowerFirst from 'lodash/lowerFirst';
+import { chakraReactSelectComponents } from '../../utils';
 
 // https://github.com/csandman/chakra-react-select
 
 export const Select: ComponentStyleConfig = {
-    parts: Object.keys(chakraComponents).map(name => lowerFirst(name)),
+    parts: chakraReactSelectComponents,
     baseStyle: {
         container: {
             width: '100%',
