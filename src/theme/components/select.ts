@@ -29,13 +29,16 @@ export const Select: ComponentStyleConfig = {
             mt: 0,
             textStyle: 'medium',
             color: mode('light.tertiary', 'dark.secondary')(props),
+            _groupHover: {
+                color: mode('light.secondary', 'dark.secondary')(props),
+            },
             borderBottomRadius: 'radius29',
             outline: mode('1px solid', 'none')(props),
             outlineColor: mode('light.bg.primary', 'transparent')(props),
         },
         option: {
             _hover: {
-                color: mode('light.secondary', 'dark.tertiary')(props),
+                color: mode('light.tertiary', 'dark.tertiary')(props),
             },
             paddingY: 'space10',
             paddingX: 0,

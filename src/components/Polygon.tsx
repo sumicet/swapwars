@@ -1,6 +1,7 @@
 import Icon from '@chakra-ui/icon';
 import { Image } from '@chakra-ui/image';
 import { Box, BoxProps, Flex } from '@chakra-ui/layout';
+import { useColorModeValue } from '@chakra-ui/system';
 import { motion } from 'framer-motion';
 import { IconType } from 'react-icons';
 
@@ -18,6 +19,8 @@ export interface PolygonProps extends BoxProps {
  * A polygon with an `Icon` in the middle
  */
 export function Polygon({ icon, rotateIcon = false, ...rest }: PolygonProps) {
+    const iconColor = useColorModeValue('dark.tertiary', 'light.bg.secondary');
+
     return (
         <Box {...rest} position='relative'>
             <Image src={purplePolygon} alt='swap' width='50px' objectFit='contain' />
@@ -37,7 +40,7 @@ export function Polygon({ icon, rotateIcon = false, ...rest }: PolygonProps) {
                 >
                     <Icon
                         as={icon}
-                        color='dark.tertiary'
+                        color={iconColor}
                         boxSize='icon.small'
                         transform={`${rotateIcon ? 'rotate(90deg)' : ''}`}
                     />

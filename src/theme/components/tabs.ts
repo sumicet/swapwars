@@ -7,7 +7,7 @@ export const Tabs: ComponentStyleConfig = {
     baseStyle: props => ({
         tab: {
             textStyle: 'extraLarge',
-            color: mode('light.secondary', 'dark.secondary')(props),
+            color: mode('light.tertiary', 'dark.secondary')(props),
             _selected: {
                 color: mode('light.bg.secondary', 'dark.tertiary')(props),
             },
