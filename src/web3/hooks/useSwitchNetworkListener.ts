@@ -9,7 +9,6 @@ export function useSwitchNetworkListener() {
     const { provider, connector } = useWeb3();
 
     useEffect(() => {
-        
         if (!provider || !connector) {
             return () => {};
         }
@@ -20,11 +19,11 @@ export function useSwitchNetworkListener() {
             window.location.reload();
 
             // Force the user back to the supported network
-            connector.activate(config.networks.mumbai)
+            connector.activate(config.networks.mumbai);
         };
 
-        provider.on('chainChanged', handleNetworkChange)
+        provider.on('chainChanged', handleNetworkChange);
 
-        return () => provider.removeListener('chainChanged', handleNetworkChange)
+        return () => provider.removeListener('chainChanged', handleNetworkChange);
     }, [connector, provider]);
 }

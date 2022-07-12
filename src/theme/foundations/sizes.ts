@@ -10,5 +10,6 @@ export const sizes = {
     tabs: {
         height: '64px',
     },
+    modal: '373px',
     ...space,
 };

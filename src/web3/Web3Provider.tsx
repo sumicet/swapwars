@@ -5,10 +5,11 @@ import {
     Web3ReactProvider,
 } from '@web3-react/core';
 import { MetaMask } from '@web3-react/metamask';
-import { createContext, ReactNode, useEffect, useMemo, useState } from 'react';
+import { createContext, ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 import { ethers } from 'ethers';
 import { EIP1193Provider } from 'eip1193-provider';
 import { metaMask, metamaskHooks } from './connectors';
+import { useConnectWallet } from './hooks';
 
 const connectors: [MetaMask, Web3ReactHooks][] = [
     [metaMask, metamaskHooks],
@@ -21,6 +22,8 @@ export interface Web3ProviderProps {
     isActivating: Web3ContextType['isActivating'];
     chainId: Required<Web3ContextType['chainId']> | null;
     connector: Web3ContextType['connector'] | null;
+    isInstalled: boolean;
+    isLocked: boolean;
 }
 
 export const Web3Context = createContext<Web3ProviderProps>({
@@ -28,13 +31,25 @@ export const Web3Context = createContext<Web3ProviderProps>({
     provider: null,
     isActivating: true,
     chainId: null,
-    connector: null
+    connector: null,
+    isInstalled: false,
+    isLocked: true
 });
 
 function Web3LocalProvider({ children }: { children: ReactNode }) {
     const { isActivating, account, chainId, connector } = useWeb3React();
     const [provider, setProvider] = useState<Web3ProviderProps['provider']>(null);
+    const [isInstalled, setIsInstalled] = useState(false);
+    const [isLocked, setIsLocked] = useState(true);
 
+
+    const onWalletNotInstalled = useCallback(() => setIsInstalled(false), [])
+    const onWalletLocked = useCallback(() => setIsLocked(false), [])
+
+    useConnectWallet({
+        onWalletNotInstalled,
+        onWalletLocked
+    })
 
     useEffect(() => {
         if (!connector || !connector.provider) {
@@ -52,9 +67,11 @@ function Web3LocalProvider({ children }: { children: ReactNode }) {
             provider: provider || null,
             isActivating,
             chainId: chainId || null,
-            connector: connector || null
+            connector: connector || null,
+            isInstalled,
+            isLocked
         }),
-        [account, chainId, connector, isActivating, provider]
+        [account, chainId, connector, isActivating, isInstalled, isLocked, provider]
     );
 
     return <Web3Context.Provider value={memoValue}>{children}</Web3Context.Provider>;

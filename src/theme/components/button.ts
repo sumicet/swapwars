@@ -4,13 +4,13 @@ import { mode } from '@chakra-ui/theme-tools';
 // https://chakra-ui.com/docs/components/button/usage
 
 export const Button: ComponentStyleConfig = {
-    baseStyle: props => ({
+    baseStyle: (props) => ({
         bg: 'accent.orange',
         padding: 'space20',
         borderRadius: 'radius40',
         width: '100%',
         textStyle: 'large',
-        color: mode('dark.tertiary', 'primary.bg.secondary')(props),
+        color: mode('light.bg.secondary', 'dark.tertiary')(props),
         boxShadow: 'buttonOrange',
 
         _disabled: {
@@ -25,10 +25,11 @@ export const Button: ComponentStyleConfig = {
             bg: 'accent.purple',
             boxShadow: 'buttonPurple',
         },
-        plain: props => ({
+        plain: (props) => ({
             bg: mode('light.bg.secondary', 'dark.bg.secondary')(props),
             boxShadow: 'none',
             borderRadius: 'radius14',
+            color: mode('light.primary', 'dark.tertiary')(props),
         }),
     },
 };
