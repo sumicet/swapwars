@@ -1,9 +1,4 @@
-import {
-    useWeb3React,
-    Web3ContextType,
-    Web3ReactHooks,
-    Web3ReactProvider,
-} from '@web3-react/core';
+import { useWeb3React, Web3ContextType, Web3ReactHooks, Web3ReactProvider } from '@web3-react/core';
 import { MetaMask } from '@web3-react/metamask';
 import { createContext, ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 import { ethers } from 'ethers';
@@ -33,23 +28,22 @@ export const Web3Context = createContext<Web3ProviderProps>({
     chainId: null,
     connector: null,
     isInstalled: false,
-    isLocked: true
+    isLocked: true,
 });
 
 function Web3LocalProvider({ children }: { children: ReactNode }) {
     const { isActivating, account, chainId, connector } = useWeb3React();
     const [provider, setProvider] = useState<Web3ProviderProps['provider']>(null);
-    const [isInstalled, setIsInstalled] = useState(false);
-    const [isLocked, setIsLocked] = useState(true);
+    const [isInstalled, setIsInstalled] = useState(true);
+    const [isLocked, setIsLocked] = useState(false);
 
-
-    const onWalletNotInstalled = useCallback(() => setIsInstalled(false), [])
-    const onWalletLocked = useCallback(() => setIsLocked(false), [])
+    const onWalletNotInstalled = useCallback(() => setIsInstalled(false), []);
+    const onWalletLocked = useCallback(() => setIsLocked(false), []);
 
     useConnectWallet({
         onWalletNotInstalled,
-        onWalletLocked
-    })
+        onWalletLocked,
+    });
 
     useEffect(() => {
         if (!connector || !connector.provider) {
@@ -69,7 +63,7 @@ function Web3LocalProvider({ children }: { children: ReactNode }) {
             chainId: chainId || null,
             connector: connector || null,
             isInstalled,
-            isLocked
+            isLocked,
         }),
         [account, chainId, connector, isActivating, isInstalled, isLocked, provider]
     );
