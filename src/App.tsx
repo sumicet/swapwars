@@ -1,9 +1,13 @@
 import { Center, Container } from '@chakra-ui/layout';
-import { Home } from './pages/Home';
 import { useColorModeValue } from '@chakra-ui/system';
+import { Home } from './pages/Home';
 import { Menu } from './components';
+import { useConnectWallet, useSwitchNetworkListener } from './web3';
 
 function App() {
+    useConnectWallet();
+    useSwitchNetworkListener();
+
     const bgColor = useColorModeValue('light.bg.primary', 'dark.bg.primary');
 
     return (

@@ -1,10 +1,10 @@
 import { Image } from '@chakra-ui/image';
 import { Box, HStack, Text } from '@chakra-ui/layout';
-import logo from '../assets/images/logo.png';
 import { Button } from '@chakra-ui/button';
 import { FiSun } from 'react-icons/fi';
 import Icon from '@chakra-ui/icon';
 import { useColorMode, useColorModeValue } from '@chakra-ui/system';
+import logo from '../assets/images/logo.png';
 import { useWeb3 } from '../web3';
 
 export function Menu() {

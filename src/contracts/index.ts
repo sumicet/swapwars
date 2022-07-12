@@ -1,6 +1,6 @@
 import { config } from '../config';
 
-const name = config.network.name;
+const name = config.networks.mumbai.chainName.toLowerCase();
 
 interface Contracts {
     Grogu: () => Promise<any>;
