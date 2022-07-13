@@ -6,7 +6,8 @@ import { mode } from '@chakra-ui/theme-tools';
 export const Button: ComponentStyleConfig = {
     baseStyle: (props) => ({
         bg: 'accent.orange',
-        padding: 'space20',
+        paddingX: 'space20',
+        height: 'button',
         borderRadius: 'radius40',
         width: '100%',
         textStyle: 'large',
@@ -31,5 +32,10 @@ export const Button: ComponentStyleConfig = {
             borderRadius: 'radius14',
             color: mode('light.primary', 'dark.tertiary')(props),
         }),
+    },
+    sizes: {
+        medium: {
+            textStyle: 'medium',
+        },
     },
 };

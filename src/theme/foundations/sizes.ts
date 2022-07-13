@@ -11,5 +11,6 @@ export const sizes = {
         height: '64px',
     },
     modal: '373px',
+    button: '60px',
     ...space,
 };

@@ -1,23 +1,20 @@
-import { MultiStyleConfig } from '@chakra-ui/theme-tools';
+import { mode, MultiStyleConfig } from '@chakra-ui/theme-tools';
 
 // https://chakra-ui.com/docs/components/popover/usage
 
 export const Popover: MultiStyleConfig = {
-    baseStyle: {
+    baseStyle: (props) => ({
         content: {
-            bg: 'primary.400',
+            bg: mode('light.bg.secondary', 'dark.bg.secondary')(props),
             borderRadius: 'radius14',
-            px: 'space16',
-            py: 'space16',
             _focusVisible: {
                 outline: 0,
             },
-            width: 300,
-            maxWidth: '100vw',
+            padding: 'space20',
         },
         popper: {
             zIndex: 'popover',
         },
         body: {},
-    },
+    }),
 };

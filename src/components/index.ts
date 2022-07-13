@@ -1,4 +1,4 @@
-export * from './Menu';
+export * from './Menu/Menu';
 export * from './Field';
 export * from './Polygon';
 export * from './Select';
