@@ -17,7 +17,7 @@ export function Web3Button() {
 
     if (isLoadingWallet) {
         return (
-            <Button variant="plain" bg="red" size="medium" width="fit-content">
+            <Button variant="plain" size="medium" width="fit-content">
                 Connecting
             </Button>
         );
