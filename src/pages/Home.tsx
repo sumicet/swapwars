@@ -1,4 +1,5 @@
 import { Flex } from '@chakra-ui/layout';
+import { AnimatePresence } from 'framer-motion';
 import {
     Tab,
     TabIndicator,
@@ -9,13 +10,12 @@ import {
     SwapWidget,
     FaucetWidget,
 } from '../components';
-import { AnimatePresence } from 'framer-motion';
 
 export function Home() {
     return (
-        <Flex flex={1} align='center' justify='center' width='100%'>
+        <Flex flex={1} align="center" justify="center" width="100%">
             <AnimatePresence>
-                <Tabs isLazy position='relative'>
+                <Tabs isLazy position="relative">
                     <TabList>
                         <Tab>Exchange</Tab>
                         <Tab>Faucet</Tab>

@@ -2,7 +2,7 @@ import { useWeb3React, Web3ContextType, Web3ReactHooks, Web3ReactProvider } from
 import { MetaMask } from '@web3-react/metamask';
 import { createContext, ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 import { ethers } from 'ethers';
-import type { Eip1193Bridge as Eip1193BridgeType } from '@ethersproject/experimental';
+import { IEthereumProvider } from 'eip1193-provider';
 import { metaMask, metamaskHooks } from './connectors';
 
 const connectors: [MetaMask, Web3ReactHooks][] = [[metaMask, metamaskHooks]];
@@ -11,7 +11,7 @@ const connectors: [MetaMask, Web3ReactHooks][] = [[metaMask, metamaskHooks]];
 
 export interface Web3ProviderProps {
     account: Required<Web3ContextType['account']> | null;
-    provider: Eip1193BridgeType['provider'] | null;
+    provider: IEthereumProvider | null;
     isActivating: Web3ContextType['isActivating'];
     chainId: Required<Web3ContextType['chainId']> | null;
     connector: Web3ContextType['connector'] | null;
@@ -55,15 +55,7 @@ function Web3LocalProvider({ children }: { children: ReactNode }) {
                 setIsInstalled(true);
 
                 const web3Provider = new ethers.providers.Web3Provider(metaMask.provider as any);
-                // https://docs.metamask.io/guide/ethereum-provider.html#ethereum-provider-api
-                // MetaMask's Ethereum JS Provider API is specified by EIP-1193
-
-                // If imported normally, I'm getting a ts error
-                // https://github.com/Microsoft/TypeScript/issues/20361#issuecomment-651838744
-                const { Eip1193Bridge } = await import('@ethersproject/experimental');
-
-                const eip1193Provider = new Eip1193Bridge(web3Provider.getSigner(), web3Provider);
-                setProvider(eip1193Provider.provider);
+                setProvider(web3Provider.provider as IEthereumProvider);
             })
             .catch(async (err) => {
                 if (!metaMask.provider) {

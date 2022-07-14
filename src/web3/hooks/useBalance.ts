@@ -22,7 +22,7 @@ export function useBalance() {
                 return balance;
             } catch (err: any) {
                 // TODO: Handle error
-                console.log(err.message);
+                // console.log(err.message);
                 return null;
             }
         },
