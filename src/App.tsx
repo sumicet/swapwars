@@ -2,12 +2,13 @@ import { Center, Container } from '@chakra-ui/layout';
 import { useColorModeValue } from '@chakra-ui/system';
 import { Home } from './pages/Home';
 import { Menu } from './components';
-import { useSwitchNetworkListener } from './web3';
+import { useEagerConnect, usePersistNetwork } from './web3';
 
 function App() {
-    useSwitchNetworkListener();
-
     const bgColor = useColorModeValue('light.bg.primary', 'dark.bg.primary');
+
+    useEagerConnect();
+    usePersistNetwork();
 
     return (
         <Center width="100%" bg={bgColor} flexDirection="column">

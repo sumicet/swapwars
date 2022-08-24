@@ -1,26 +1,4 @@
-import { AddEthereumChainParameter } from '@web3-react/types';
-
-const networks: { [key: string]: AddEthereumChainParameter } = {
-    mumbai: {
-        chainId: 80001,
-        chainName: 'Mumbai',
-        nativeCurrency: {
-            decimals: 18,
-            name: 'MATIC',
-            symbol: 'MATIC',
-        },
-        rpcUrls: [
-            'https://matic-mumbai.chainstacklabs.com',
-            'https://rpc-mumbai.matic.today',
-            'https://rpc.ankr.com/polygon_mumbai',
-        ],
-        blockExplorerUrls: ['https://mumbai.polygonscan.com/'],
-        iconUrls: ['https://polygonscan.com/images/logo-white.svg?v=0.0.2'],
-    },
-};
-
 export const config = {
-    networks,
     contract: {
         deployedAddress: {
             TokenSwap: '0x226121C1d046956247AAAf9D7497d06Fc90Ac715',

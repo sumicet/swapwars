@@ -1,12 +1,16 @@
 import { HStack, Text, VStack } from '@chakra-ui/layout';
 import { Popover, PopoverBody, PopoverContent, PopoverTrigger } from '@chakra-ui/popover';
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { Image } from '@chakra-ui/image';
 import { useColorModeValue } from '@chakra-ui/system';
-import { Token, useBalance } from '../../web3';
+import { chain, useAccount, useBalance } from 'wagmi';
+import { ethers } from 'ethers';
+import { Token } from '../../web3';
 import grogu from '../../assets/images/grogu.png';
 import mando from '../../assets/images/mando.png';
 import matic from '../../assets/images/matic.png';
+import { config } from '../../config';
+import { stringToFixed } from '../../utils';
 
 type Balances =
     | {
@@ -23,31 +27,27 @@ const TokenImages: Balances = {
  * @param children The popover trigger
  */
 export function BalancePopover({ children }: { children: ReactNode }) {
-    const [balances, setBalances] = useState<Balances>({ Grogu: null, Mando: null, Matic: null });
-    const getBalance = useBalance();
+    const { address } = useAccount();
+    const useBalanceArgs = { addressOrName: address, watch: true, chainId: chain.polygonMumbai.id };
+    const { data: groguData } = useBalance({
+        ...useBalanceArgs,
+        token: config.contract.deployedAddress.Grogu,
+    });
+    const { data: mandoData } = useBalance({
+        ...useBalanceArgs,
+        token: config.contract.deployedAddress.Mando,
+    });
+    const { data: maticData } = useBalance({
+        ...useBalanceArgs,
+        token: config.contract.deployedAddress.Matic,
+    });
+    const balances = {
+        Grogu: stringToFixed(groguData?.formatted || '', 4),
+        Mando: stringToFixed(mandoData?.formatted || '', 4),
+        Matic: stringToFixed(maticData?.formatted || '', 4),
+    };
+
     const textColor = useColorModeValue('light.primary', 'dark.tertiary');
-
-    useEffect(() => {
-        const getBalances = async () => {
-            const updatedBalances = await Promise.all([
-                getBalance('Matic'),
-                getBalance('Grogu'),
-                getBalance('Mando'),
-            ]);
-
-            setBalances({
-                Matic: updatedBalances[0],
-                Grogu: updatedBalances[1],
-                Mando: updatedBalances[2],
-            });
-        };
-
-        getBalances();
-
-        const interval = setInterval(getBalances, 10000);
-
-        return () => clearInterval(interval);
-    }, [getBalance]);
 
     return (
         <Popover trigger="hover" matchWidth>
@@ -57,7 +57,7 @@ export function BalancePopover({ children }: { children: ReactNode }) {
                     <VStack>
                         {balances &&
                             Object.entries(balances).map(([key, value]) => (
-                                <HStack>
+                                <HStack key={key}>
                                     <Image
                                         src={TokenImages[key as Token] || ''}
                                         boxSize="icon.medium"

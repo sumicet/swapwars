@@ -1,17 +1,18 @@
 import { ChakraProvider } from '@chakra-ui/provider';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { WagmiConfig } from 'wagmi';
 import App from './App';
 import './index.css';
 import { theme } from './theme';
-import { Web3Provider } from './web3';
+import { client } from './web3';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-        <Web3Provider>
+        <WagmiConfig client={client}>
             <ChakraProvider theme={theme}>
                 <App />
             </ChakraProvider>
-        </Web3Provider>
+        </WagmiConfig>
     </React.StrictMode>
 );
