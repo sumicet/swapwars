@@ -1,16 +1,16 @@
 import { ethers } from 'ethers';
+import { useCallback } from 'react';
 import { config } from '../../config';
-import { contracts } from '../../contracts';
 import { Contract } from '../types';
 
 export function useContract() {
-    const getContract = async (name: Contract) => {
+    const getContract = useCallback(async (name: Contract) => {
         try {
             let abi;
             if (name === 'Matic') {
-                abi = (await contracts.ERC20()).abi;
+                abi = (await import('../abis/ERC20.json')).default;
             } else {
-                abi = (await contracts[name]()).abi;
+                abi = (await import(`../abis/${name}.json`)).default;
             }
             // @ts-ignore
             const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -29,7 +29,7 @@ export function useContract() {
             console.log(err);
             return null;
         }
-    };
+    }, []);
 
     return getContract;
 }
