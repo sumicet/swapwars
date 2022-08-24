@@ -22,11 +22,11 @@ export function useContract() {
 
             const account = accounts[0];
 
-            const signer = await provider.getSigner(account);
+            const signer = provider.getSigner(account);
 
             return new ethers.Contract(config.contract.deployedAddress[name], abi, signer);
         } catch (err: any) {
-            console.log(err);
+            console.error('#Contract error:', err);
             return null;
         }
     }, []);
