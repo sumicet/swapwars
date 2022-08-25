@@ -1,35 +1,54 @@
-import { ethers } from 'ethers';
-import { useCallback } from 'react';
+import { GetContractArgs, PrepareWriteContractConfig, ReadContractConfig } from '@wagmi/core';
+import { chain } from 'wagmi';
+import {
+    getContract as getWagmiContract,
+    fetchSigner,
+    prepareWriteContract as prepareWriteWagmiContract,
+    writeContract as writeWagmiContract,
+    readContract as readWagmiContract,
+} from 'wagmi/actions';
 import { config } from '../../config';
-import { Contract } from '../types';
+import groguAbi from '../abis/Grogu.json';
+import mandoAbi from '../abis/Mando.json';
+import tokenSwapAbi from '../abis/TokenSwap.json';
+
+const contract = {
+    [config.contract.Grogu]: groguAbi,
+    [config.contract.Mando]: mandoAbi,
+    [config.contract.TokenSwap]: tokenSwapAbi,
+};
 
 export function useContract() {
-    const getContract = useCallback(async (name: Contract) => {
-        try {
-            let abi;
-            if (name === 'Matic') {
-                abi = (await import('../abis/ERC20.json')).default;
-            } else {
-                abi = (await import(`../abis/${name}.json`)).default;
-            }
-            // @ts-ignore
-            const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const getContract = async (
+        args: Omit<GetContractArgs, 'contractInterface' | 'signerOrProvider'>
+    ) => {
+        const signer = await fetchSigner();
+        return getWagmiContract({
+            ...args,
+            contractInterface: contract[args.addressOrName],
+            signerOrProvider: signer,
+        });
+    };
 
-            const accounts = await provider.listAccounts();
-            if (!accounts || !accounts.length) {
-                return null;
-            }
+    const writeContract = async (
+        args: Omit<PrepareWriteContractConfig, 'contractInterface' | 'signer' | 'chainId'>
+    ) => {
+        const signer = await fetchSigner();
+        const methodConfig = await prepareWriteWagmiContract({
+            ...args,
+            contractInterface: contract[args.addressOrName],
+            signer,
+            chainId: chain.polygonMumbai.id,
+        });
+        return writeWagmiContract(methodConfig);
+    };
 
-            const account = accounts[0];
+    const readContract = async (args: Omit<ReadContractConfig, 'contractInterface' | 'chainId'>) =>
+        readWagmiContract({
+            ...args,
+            contractInterface: contract[args.addressOrName],
+            chainId: chain.polygonMumbai.id,
+        });
 
-            const signer = provider.getSigner(account);
-
-            return new ethers.Contract(config.contract.deployedAddress[name], abi, signer);
-        } catch (err: any) {
-            console.error('#Contract error:', err);
-            return null;
-        }
-    }, []);
-
-    return getContract;
+    return { getContract, writeContract, readContract };
 }

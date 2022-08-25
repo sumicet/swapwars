@@ -1,54 +1,77 @@
-import { BigNumber, ethers } from 'ethers';
+import Big from 'big.js';
 import { useCallback } from 'react';
-import { DECIMALS_BN, PPM } from '../../config/constants';
+import { useAccount } from 'wagmi';
+import { chain, fetchBalance } from '@wagmi/core';
+import { BigNumber, ethers } from 'ethers';
+import { DECIMALS_BN, DECIMALS_BN_BIG, PPM } from '../../config/constants';
 import { useContract } from './useContract';
 import { Token } from '../types';
 import { config } from '../../config';
 
-export function useSwap() {
-    const getContract = useContract();
+export function useSwap({
+    amount,
+    tokenIn,
+    tokenOut,
+}: {
+    amount: string;
+    tokenIn: Exclude<Token, 'Matic'>;
+    tokenOut: Exclude<Token, 'Matic'>;
+}) {
+    const { address } = useAccount();
+    const { writeContract, readContract } = useContract();
 
-    const swap = useCallback(
-        async ({
-            amount,
-            tokenIn,
-            tokenOut,
-        }: {
-            amount: string;
-            tokenIn: Token;
-            tokenOut: Token;
-        }) => {
-            // try {
-            //     if (!provider) {
-            //         throw new Error('No provider.');
-            //     }
-            //     const swapAmount = BigNumber.from(amount).mul(DECIMALS_BN);
-            //     const TokenIn = await getContract(tokenIn);
-            //     const TokenSwap = await getContract('TokenSwap');
-            //     if (!TokenIn || !TokenSwap) {
-            //         throw new Error('Contracts issue.');
-            //     }
-            //     // Find pool id
-            //     const tokenInAddress = config.contract.deployedAddress[tokenIn];
-            //     const tokenOutAddress = config.contract.deployedAddress[tokenOut];
-            //     const pool = await TokenSwap.pools(0);
-            //     console.log(
-            //         pool.tokenA,
-            //         pool.tokenB,
-            //         ethers.utils.formatEther(pool.exchageRate.mul(DECIMALS_BN).div(PPM)).toString(),
-            //         ethers.utils.formatEther(pool.tokenAsupply).toString(),
-            //         ethers.utils.formatEther(pool.tokenBsupply).toString()
-            //     );
-            //     // const approval = await TokenIn.approve(TokenSwap.address, swapAmount);
-            //     // await approval.wait();
-            //     // const tx = await TokenSwap.buy(0, swapAmount);
-            //     // await tx.wait();
-            // } catch (err: any) {
-            //     console.log(err.message);
-            // }
-        },
-        [getContract] // provider
-    );
+    const swap = useCallback(async () => {
+        try {
+            if (!address) {
+                console.error('Please connect your wallet.');
+                return;
+            }
+
+            const balanceTokenIn = await fetchBalance({
+                addressOrName: address,
+                chainId: chain.polygonMumbai.id,
+                token: config.contract[tokenIn],
+            });
+
+            const amountBN = BigNumber.from(amount).mul(DECIMALS_BN);
+
+            if (new Big(amount).gt(ethers.utils.formatEther(balanceTokenIn.value))) {
+                console.error(`You don't have enough ${tokenIn.toUpperCase()} for this swap.`);
+                return;
+            }
+
+            const { wait: waitWriteContract } = await writeContract({
+                addressOrName: config.contract[tokenIn],
+                functionName: 'approve',
+                args: [config.contract.TokenSwap, amountBN],
+            });
+
+            await waitWriteContract();
+
+            const { wait: waitSwap } = await writeContract({
+                addressOrName: config.contract.TokenSwap,
+                functionName: 'buy',
+                args: [0, amountBN],
+            });
+
+            await waitSwap();
+
+            const pool = await readContract({
+                addressOrName: config.contract.TokenSwap,
+                functionName: 'pools',
+                args: [0],
+            });
+
+            const swappedAmount = new Big(amount)
+                .div(new Big(pool.exchageRate))
+                .times(PPM)
+                .toPrecision(2);
+
+            console.log(`Congrats! You got ${swappedAmount} ${tokenOut.toUpperCase()}.`);
+        } catch (error: any) {
+            console.error(error.message || error);
+        }
+    }, [address, amount, readContract, tokenIn, tokenOut, writeContract]);
 
     return swap;
 }

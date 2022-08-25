@@ -9,15 +9,20 @@ export type Tokens = {
     image: string;
 } | null;
 
+export interface Amount {
+    in: string;
+    out: string;
+}
+
 export const tokens: Tokens[] = [
     {
         label: 'GROGU',
-        value: config.contract.deployedAddress.Grogu,
+        value: config.contract.Grogu,
         image: grogu,
     },
     {
         label: 'MANDO',
-        value: config.contract.deployedAddress.Mando,
+        value: config.contract.Mando,
         image: mando,
     },
     {

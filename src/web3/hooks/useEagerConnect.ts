@@ -9,7 +9,6 @@ export function useEagerConnect() {
     const { connectAsync, isSuccess } = useConnect({ connector: injectedConnector });
     const [canConnect] = useLocalStorage(persistWalletConnection);
 
-    console.log(canConnect, 'canConnect');
     useEffect(() => {
         if (isSuccess || !canConnect) return; // Don't try to connect twice, it throws an error
 

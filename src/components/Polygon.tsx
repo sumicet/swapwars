@@ -22,13 +22,13 @@ export function Polygon({ icon, rotateIcon = false, ...rest }: PolygonProps) {
     const iconColor = useColorModeValue('dark.tertiary', 'light.bg.secondary');
 
     return (
-        <Box {...rest} position='relative'>
-            <Image src={purplePolygon} alt='swap' width='50px' objectFit='contain' />
+        <Box {...rest} position="relative">
+            <Image src={purplePolygon} alt="swap" width="50px" objectFit="contain" />
             <Flex
-                position='absolute'
-                top='50%'
-                left='50%'
-                transform={`translateX(-50%) translateY(-50%)`}
+                position="absolute"
+                top="50%"
+                left="50%"
+                transform="translateX(-50%) translateY(-50%)"
             >
                 <motion.div
                     initial={{ opacity: 0 }}
@@ -41,7 +41,7 @@ export function Polygon({ icon, rotateIcon = false, ...rest }: PolygonProps) {
                     <Icon
                         as={icon}
                         color={iconColor}
-                        boxSize='icon.small'
+                        boxSize="icon.small"
                         transform={`${rotateIcon ? 'rotate(90deg)' : ''}`}
                     />
                 </motion.div>

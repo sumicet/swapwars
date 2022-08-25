@@ -1,9 +1,12 @@
 import { BigNumber, ethers } from 'ethers';
-import { useContract } from '../web3/hooks/useContract';
 
 const PPM = 1000000;
 const decimals = BigNumber.from(18);
 const decimalsBN = BigNumber.from(10).pow(decimals);
+
+const useContract = (name: string) => {
+    return () => '' as any;
+};
 
 function AppX() {
     const getContract = useContract();

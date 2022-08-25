@@ -1,10 +1,9 @@
 import { HStack, Text, VStack } from '@chakra-ui/layout';
 import { Popover, PopoverBody, PopoverContent, PopoverTrigger } from '@chakra-ui/popover';
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 import { Image } from '@chakra-ui/image';
 import { useColorModeValue } from '@chakra-ui/system';
 import { chain, useAccount, useBalance } from 'wagmi';
-import { ethers } from 'ethers';
 import { Token } from '../../web3';
 import grogu from '../../assets/images/grogu.png';
 import mando from '../../assets/images/mando.png';
@@ -31,15 +30,15 @@ export function BalancePopover({ children }: { children: ReactNode }) {
     const useBalanceArgs = { addressOrName: address, watch: true, chainId: chain.polygonMumbai.id };
     const { data: groguData } = useBalance({
         ...useBalanceArgs,
-        token: config.contract.deployedAddress.Grogu,
+        token: config.contract.Grogu,
     });
     const { data: mandoData } = useBalance({
         ...useBalanceArgs,
-        token: config.contract.deployedAddress.Mando,
+        token: config.contract.Mando,
     });
     const { data: maticData } = useBalance({
         ...useBalanceArgs,
-        token: config.contract.deployedAddress.Matic,
+        token: config.contract.Matic,
     });
     const balances = {
         Grogu: stringToFixed(groguData?.formatted || '', 4),

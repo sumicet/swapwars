@@ -1,8 +1,8 @@
 import { Image } from '@chakra-ui/image';
 import { ControlProps, GroupBase, chakraComponents, OptionProps, Props } from 'chakra-react-select';
+import { HStack, Text } from '@chakra-ui/layout';
 import { Select } from './Select/Select';
 
-import { HStack, Text } from '@chakra-ui/layout';
 
 function Control<Options>({ children, ...rest }: ControlProps<Options, false, GroupBase<Options>>) {
     const { selectProps } = rest;

@@ -1,16 +1,15 @@
-import { Button } from '@chakra-ui/button';
-import { ChangeEvent, useCallback, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { FiRepeat } from 'react-icons/fi';
 import { Field } from '../Field';
-import { WidgetBodyWrapper, WidgetIcon, WidgetTitle, WidgetWrapper } from '.';
+import {
+    WidgetBodyWrapper,
+    SwapWidgetButton,
+    WidgetIcon,
+    WidgetTitle,
+    WidgetWrapper,
+} from './components';
 import { SelectToken } from '../SelectToken';
-import { tokens, Tokens } from './types';
-import { useSwap } from '../../web3';
-
-interface Amount {
-    in: string;
-    out: string;
-}
+import { Amount, tokens, Tokens } from './types';
 
 export function SwapWidget() {
     const [amount, setAmount] = useState<Amount>({ in: '', out: '' });
@@ -26,24 +25,9 @@ export function SwapWidget() {
 
     const [first, setFirst] = useState<Tokens>();
     const [second, setSecond] = useState<Tokens>();
+
     const optionsFirst = tokens.filter((value) => value?.value !== second?.value);
     const optionsSecond = tokens.filter((value) => value?.value !== first?.value);
-
-    const buttonText =
-        !first || !second
-            ? 'Select a token'
-            : !amount.in || !amount.out
-            ? 'Select an amount'
-            : 'Swap';
-
-    const swap = useSwap();
-
-    const handleSwap = useCallback(() => {
-        if (!amount) {
-            return;
-        }
-        swap({ amount: amount.in, tokenIn: 'Grogu', tokenOut: 'Mando' });
-    }, [amount, swap]);
 
     return (
         <WidgetWrapper>
@@ -76,9 +60,7 @@ export function SwapWidget() {
                     />
                 </Field>
             </WidgetBodyWrapper>
-            <Button isDisabled={buttonText !== 'Swap'} onClick={handleSwap}>
-                {buttonText}
-            </Button>
+            <SwapWidgetButton first={first} second={second} amount={amount} />
         </WidgetWrapper>
     );
 }
