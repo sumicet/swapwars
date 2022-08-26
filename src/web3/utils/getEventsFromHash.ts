@@ -1,34 +1,32 @@
-/* eslint-disable no-promise-executor-return */
-import { JsonFragment } from '@ethersproject/abi';
-import { ethers } from 'ethers';
-import { getContract, GetContractArgs, fetchTransaction } from 'wagmi/actions';
+import { JsonFragment, Interface } from '@ethersproject/abi';
+import { getContract, GetContractArgs, fetchTransaction, fetchSigner } from 'wagmi/actions';
 
 /**
- * Read about filter args: https://docs.ethers.io/v5/concepts/events/
- *
  * @param eventName
- * @param args Filter args. Eg for `Transfer(address indexed src, address indexed dst, uint val)` you can pass `[src, dst]`. Notice that only `src` and `dst` are *indexed*, so ONLY they qualify for filtering
- * @param fromBlock Start searching from `fromBlock`
- * @param toBlock Stop searching at `toBlock`
- * @param addressOrName
- * @param contractInterface
+ * @param hash Transaction hash
+ * @param args Filter args
+ * @param addressOrName The address of the contract
+ * @param contractInterface The contract's ABI
  * @param signer
+ *
+ * Eg for `event Transfer(address indexed src, address indexed dst, uint val)` you can pass `[src, dst]` as `args`. Notice that only `src` and `dst` are *indexed*, so ONLY they qualify for filtering
+ *
+ * Read about filter args: https://docs.ethers.io/v5/concepts/events/
  */
 export const getEventsFromHash = async ({
     name,
     args,
     hash,
-    signer,
     ...contractArgs
 }: Omit<GetContractArgs, 'signerOrProvider'> & {
     name: string;
     args: any[];
     hash: `0x${string}`;
-    signer: GetContractArgs['signerOrProvider'];
 }) => {
+    const signer = await fetchSigner();
     const transaction = await fetchTransaction({ hash });
     const contract = getContract({ ...contractArgs, signerOrProvider: signer });
-    const iface = new ethers.utils.Interface(contractArgs.contractInterface as JsonFragment[]);
+    const iface = new Interface(contractArgs.contractInterface as JsonFragment[]);
 
     const filter = contract.filters[name](...args);
 
