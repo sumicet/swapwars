@@ -30,6 +30,7 @@
         "@chakra-ui/utils": "^2.0.2",
         "@emotion/react": "^11.9.0",
         "@emotion/styled": "^11.8.1",
+        "@ethersproject/abi": "^5.7.0",
         "@ethersproject/experimental": "^5.6.3",
         "@ethersproject/providers": "^5.6.8",
         "@wagmi/core": "^0.5.4",
