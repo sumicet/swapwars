@@ -30,7 +30,7 @@ export const getEventsFromHash = async ({
     const contract = getContract({ ...contractArgs, signerOrProvider: signer });
     const iface = new ethers.utils.Interface(contractArgs.contractInterface as JsonFragment[]);
 
-    const filter = contract.filters.TokenBought(...args);
+    const filter = contract.filters[name](...args);
 
     const events = await contract.queryFilter(
         filter,
