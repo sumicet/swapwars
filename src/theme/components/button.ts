@@ -32,6 +32,20 @@ export const Button: ComponentStyleConfig = {
             borderRadius: 'radius14',
             color: mode('light.primary', 'dark.tertiary')(props),
         }),
+        small: (props) => ({
+            paddingX: 'space10',
+            paddingY: 'space10',
+            height: 'auto',
+            borderRadius: 'radius7',
+            width: '100%',
+            bg: mode('light.bg.primary', 'dark.bg.tertiary')(props),
+            boxShadow: 'none',
+            color: mode('light.secondary', 'dark.secondary')(props),
+
+            _hover: {
+                color: mode('light.tertiary', 'dark.tertiary')(props),
+            },
+        }),
     },
     sizes: {
         medium: {

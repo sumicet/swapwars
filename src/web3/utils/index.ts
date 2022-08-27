@@ -1,4 +1,3 @@
-export * from './installWallet';
-export * from './accessFaucet';
+export * from './faucet';
 export * from './contract';
-export * from '../hooks/useTokenBalance';
+export * from './wallet';

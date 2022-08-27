@@ -1,18 +1,28 @@
-import { useEffect } from 'react';
 import { useConnect } from 'wagmi';
-import { useLocalStorage } from 'react-use';
+import { useEffect } from 'react';
 import { injectedConnector } from '../connectors';
-import { persistWalletConnection } from '../../config/constants';
+import { walletConnected } from '../../config/constants';
 
-// Persist the wallet connection
+/**
+ * Persist the wallet connection
+ *
+ * Wrapper around `wagmi`'s `useConnect`
+ */
 export function useEagerConnect() {
-    const { connectAsync, isSuccess } = useConnect({ connector: injectedConnector });
-    const [canConnect] = useLocalStorage(persistWalletConnection);
+    const {
+        connectAsync,
+        connect: wagmiConnect,
+        ...rest
+    } = useConnect({ connector: injectedConnector });
 
     useEffect(() => {
-        if (isSuccess || !canConnect) return; // Don't try to connect twice, it throws an error
+        const canConnect = localStorage.getItem(walletConnected);
 
-        // TODO: Add toast
+        if (!canConnect) return;
+
+        // TODO: add toast
         connectAsync().catch((error) => console.error(error.message));
-    }, [connectAsync, isSuccess, canConnect]);
+    }, [connectAsync]);
+
+    return rest;
 }

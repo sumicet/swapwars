@@ -7,7 +7,7 @@ import { useColorMode, useColorModeValue } from '@chakra-ui/system';
 import logo from '../../assets/images/logo.png';
 import { Web3Button } from './Web3Button';
 
-export function Menu() {
+export function Menu({ isLoading }: { isLoading: boolean }) {
     const { toggleColorMode } = useColorMode();
 
     const textColor = useColorModeValue('accent.normalPurple', 'dark.tertiary');
@@ -20,7 +20,7 @@ export function Menu() {
                 Swapwars
             </Text>
             <HStack spacing="space20" flex={1} alignItems="center" justifyContent="flex-end">
-                <Web3Button />
+                <Web3Button isLoading={isLoading} />
                 <Button variant="plain" width="fit-content" onClick={toggleColorMode}>
                     <Icon as={FiSun} color={iconColor} />
                 </Button>

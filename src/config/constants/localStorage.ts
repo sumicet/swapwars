@@ -1,1 +1,1 @@
-export const persistWalletConnection = 'swapwars-persist-wallet-connection';
+export const walletConnected = 'swapwars.wallet.connected';
