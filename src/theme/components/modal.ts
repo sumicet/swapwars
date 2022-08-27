@@ -1,4 +1,5 @@
-import { mode, MultiStyleConfig } from '@chakra-ui/theme-tools';
+import { MultiStyleConfig } from '@chakra-ui/system';
+import { mode } from '@chakra-ui/theme-tools';
 
 // https://chakra-ui.com/docs/components/modal/usage
 
@@ -7,7 +8,7 @@ import { mode, MultiStyleConfig } from '@chakra-ui/theme-tools';
 // https://github.com/chakra-ui/chakra-ui/pull/6303
 
 export const Modal: MultiStyleConfig = {
-    baseStyle: (props) => ({
+    baseStyle: (props: any) => ({
         // overlay: {
         //     // zIndex: 'modal',
         //     bg: 'transparent',

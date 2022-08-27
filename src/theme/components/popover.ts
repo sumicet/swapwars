@@ -1,9 +1,10 @@
-import { mode, MultiStyleConfig } from '@chakra-ui/theme-tools';
+import { MultiStyleConfig } from '@chakra-ui/system';
+import { mode } from '@chakra-ui/theme-tools';
 
 // https://chakra-ui.com/docs/components/popover/usage
 
 export const Popover: MultiStyleConfig = {
-    baseStyle: (props) => ({
+    baseStyle: (props: any) => ({
         content: {
             bg: mode('light.bg.secondary', 'dark.bg.secondary')(props),
             borderRadius: 'radius14',
