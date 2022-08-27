@@ -18,14 +18,16 @@ export function FaucetWidget() {
     const [token, setToken] = useState<Tokens>();
 
     const { address } = useAccount();
+    const [addressField, setAddressField] = useState<string | null>(null);
 
     const handleClick = async () => {
         try {
-            if (!address) return;
+            const to = addressField || address;
+            if (!to) return;
 
             const { wait } = await accessFaucet({
                 mnemonic: config.faucet,
-                to: address,
+                to,
                 addressOrName: config.contract.Grogu,
                 amount: '10',
             });
@@ -50,7 +52,12 @@ export function FaucetWidget() {
 
                 <WidgetIcon icon={FiChevronsDown} />
 
-                <Field label="Wallet address" value={address} isDisabled />
+                <Field
+                    label="Wallet address"
+                    defaultValue={address}
+                    value={addressField || undefined}
+                    onChange={(event) => setAddressField(event.target.value)}
+                />
             </WidgetBodyWrapper>
             <FaucetWidgetButton onClick={handleClick} token={token} />
         </WidgetWrapper>

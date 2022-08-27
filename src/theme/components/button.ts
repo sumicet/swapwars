@@ -12,17 +12,18 @@ export const Button: ComponentStyleConfig = {
         textStyle: 'large',
 
         _disabled: {
-            bg: mode('light.bg.tertiary', 'dark.bg.tertiary')(props),
+            bg: mode('light.bg.primary', 'dark.bg.tertiary')(props),
             boxShadow: 'none',
             color: mode('light.secondary', 'dark.secondary')(props),
             cursor: 'default',
         },
     }),
     variants: {
-        purple: {
+        purple: (props) => ({
             bg: 'accent.purple',
             boxShadow: 'buttonPurple',
-        },
+            color: mode('light.bg.secondary', 'dark.tertiary')(props),
+        }),
         plain: (props) => ({
             bg: mode('light.bg.secondary', 'dark.bg.secondary')(props),
             borderRadius: 'radius14',
