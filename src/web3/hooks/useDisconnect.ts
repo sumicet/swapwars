@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { walletConnected } from 'src/config/constants';
 import { useDisconnect as useWagmiDisconnect } from 'wagmi';
 
@@ -7,10 +8,10 @@ import { useDisconnect as useWagmiDisconnect } from 'wagmi';
 export function useDisconnect() {
     const { disconnect: wagmiDisconnect, disconnectAsync, ...rest } = useWagmiDisconnect();
 
-    const disconnect = async () => {
+    const disconnect = useCallback(async () => {
         await disconnectAsync();
         localStorage.removeItem(walletConnected);
-    };
+    }, [disconnectAsync]);
 
     return { disconnect, ...rest };
 }
