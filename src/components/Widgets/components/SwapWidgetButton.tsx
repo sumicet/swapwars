@@ -1,4 +1,5 @@
 import { Button } from '@chakra-ui/button';
+import { useAccount } from 'wagmi';
 import { useConnect, useSwap } from '../../../web3';
 import { Amount, Tokens } from '../types';
 
@@ -13,7 +14,8 @@ export function SwapWidgetButton({
 }) {
     const swap = useSwap({ tokenIn: 'Grogu', tokenOut: 'Mando', amount: amount.in });
 
-    const { connect, isLoading, data } = useConnect();
+    const { connect, isLoading } = useConnect();
+    const { isConnected, isConnecting } = useAccount();
 
     const handleSwap = () => {
         if (!amount) {
@@ -22,11 +24,11 @@ export function SwapWidgetButton({
         swap();
     };
 
-    if (isLoading) {
-        return <Button isLoading={isLoading} />;
+    if (isLoading || isConnecting) {
+        return <Button isLoading={isLoading || isConnecting} />;
     }
 
-    if (!data?.account) {
+    if (!isConnected) {
         return (
             <Button variant="purple" onClick={connect}>
                 Connect wallet
