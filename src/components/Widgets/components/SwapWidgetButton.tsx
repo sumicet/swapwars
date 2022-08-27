@@ -25,24 +25,36 @@ export function SwapWidgetButton({
     };
 
     if (isLoading || isConnecting) {
-        return <Button isLoading={isLoading || isConnecting} />;
+        return <Button variant="orange" isLoading={isLoading || isConnecting} />;
     }
 
     if (!isConnected) {
         return (
-            <Button variant="purple" onClick={connect}>
+            <Button variant="orange" onClick={connect}>
                 Connect wallet
             </Button>
         );
     }
 
     if (!first || !second) {
-        return <Button isDisabled>Select a token</Button>;
+        return (
+            <Button variant="orange" isDisabled>
+                Select a token
+            </Button>
+        );
     }
 
     if (!amount.in || !amount.out) {
-        return <Button isDisabled>Select an amount</Button>;
+        return (
+            <Button variant="orange" isDisabled>
+                Select an amount
+            </Button>
+        );
     }
 
-    return <Button onClick={handleSwap}>Swap</Button>;
+    return (
+        <Button variant="orange" onClick={handleSwap}>
+            Swap
+        </Button>
+    );
 }

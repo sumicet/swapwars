@@ -11,27 +11,32 @@ export function FaucetWidgetButton({
     onClick: ButtonProps['onClick'];
     token: Tokens | undefined;
 }) {
-    const buttonText = !token ? 'Select a token' : 'Send';
-
     const { isConnected } = useAccount();
     const { connect, isLoading } = useConnect();
     const { data } = useTokenBalance(token?.value);
 
-    if (isConnected && data && new Big(data?.formatted || '0').gt('10')) {
+    if (isConnected) {
+        if (data && new Big(data?.formatted || '0').gt('10')) {
+            return (
+                <Button variant="purple" isDisabled>
+                    You have enough tokens
+                </Button>
+            );
+        }
+        if (token) {
+            return (
+                <Button variant="purple" onClick={onClick}>
+                    Send
+                </Button>
+            );
+        }
         return (
             <Button variant="purple" isDisabled>
-                You have enough tokens
+                Select a token
             </Button>
         );
     }
-    if (isConnected) {
-        return (
-            <Button variant="purple" isDisabled={buttonText !== 'Send'} onClick={onClick}>
-                {buttonText}
-            </Button>
-        );
-    }
-    // TODO
+
     return (
         <Button variant="purple" onClick={connect} isLoading={isLoading}>
             Connect wallet

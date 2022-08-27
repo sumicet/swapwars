@@ -5,17 +5,14 @@ import { mode } from '@chakra-ui/theme-tools';
 
 export const Button: ComponentStyleConfig = {
     baseStyle: (props) => ({
-        bg: 'accent.orange',
         paddingX: 'space20',
         height: 'button',
         borderRadius: 'radius40',
         width: '100%',
         textStyle: 'large',
-        color: mode('light.bg.secondary', 'dark.tertiary')(props),
-        boxShadow: 'buttonOrange',
 
         _disabled: {
-            bg: mode('light.bg.primary', 'dark.bg.tertiary')(props),
+            bg: mode('light.bg.tertiary', 'dark.bg.tertiary')(props),
             boxShadow: 'none',
             color: mode('light.secondary', 'dark.secondary')(props),
             cursor: 'default',
@@ -28,7 +25,6 @@ export const Button: ComponentStyleConfig = {
         },
         plain: (props) => ({
             bg: mode('light.bg.secondary', 'dark.bg.secondary')(props),
-            boxShadow: 'none',
             borderRadius: 'radius14',
             color: mode('light.primary', 'dark.tertiary')(props),
         }),
@@ -39,17 +35,24 @@ export const Button: ComponentStyleConfig = {
             borderRadius: 'radius7',
             width: '100%',
             bg: mode('light.bg.primary', 'dark.bg.tertiary')(props),
-            boxShadow: 'none',
             color: mode('light.secondary', 'dark.secondary')(props),
 
             _hover: {
                 color: mode('light.tertiary', 'dark.tertiary')(props),
             },
         }),
+        orange: (props) => ({
+            bg: 'accent.orange',
+            color: mode('light.bg.secondary', 'dark.tertiary')(props),
+            boxShadow: 'buttonOrange',
+        }),
     },
     sizes: {
         medium: {
             textStyle: 'medium',
         },
+    },
+    defaultProps: {
+        variant: 'plain',
     },
 };

@@ -11,7 +11,6 @@ export function Web3Button() {
         return (
             <Button
                 isLoading={isLoading || isConnecting}
-                variant="orange"
                 size="medium"
                 textStyle="medium"
                 width={165}
@@ -22,7 +21,7 @@ export function Web3Button() {
     if (isConnected) {
         return (
             <AccountPopover>
-                <Button variant="plain" size="medium" width={165}>
+                <Button size="medium" width={165}>
                     {address?.slice(0, 6)}...{address?.slice(address.length - 4)}
                 </Button>
             </AccountPopover>
@@ -31,20 +30,14 @@ export function Web3Button() {
 
     if (isDisconnected) {
         return (
-            <Button variant="orange" size="medium" onClick={connect} textStyle="medium" width={165}>
+            <Button size="medium" onClick={connect} textStyle="medium" width={165}>
                 Connect wallet
             </Button>
         );
     }
 
     return (
-        <Button
-            variant="orange"
-            size="medium"
-            onClick={installWallet}
-            textStyle="medium"
-            width={165}
-        >
+        <Button size="medium" onClick={installWallet} textStyle="medium" width={165}>
             Install MetaMask
         </Button>
     );
