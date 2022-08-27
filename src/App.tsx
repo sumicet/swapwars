@@ -10,14 +10,8 @@ import { useEagerConnect, usePersistNetwork } from './web3';
 function App() {
     const bgColor = useColorModeValue('light.bg.primary', 'dark.bg.primary');
 
-    const { isLoading } = useEagerConnect();
+    useEagerConnect();
     usePersistNetwork();
-
-    const { data } = useTransaction({
-        hash: '0xfbbcdac225c82de12e796cd79b728c65146ec067e1c67da656f5dda89c407b4c',
-    });
-
-    const { address } = useAccount();
 
     // const { getContract } = useContract();
     // useEffect(() => {
@@ -81,7 +75,7 @@ function App() {
 
     return (
         <Center width="100%" bg={bgColor} flexDirection="column">
-            <Menu isLoading={isLoading} />
+            <Menu />
             <Container centerContent width="100%" flex={1} maxWidth="container" paddingX="space20">
                 <Home />
             </Container>
