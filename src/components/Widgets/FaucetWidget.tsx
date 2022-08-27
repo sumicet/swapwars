@@ -1,17 +1,44 @@
-import { Button } from '@chakra-ui/button';
 import { useState } from 'react';
 import { FiChevronsDown } from 'react-icons/fi';
 import { useAccount } from 'wagmi';
+import { accessFaucet } from 'src/web3';
+import { config } from 'src/config';
 import { Field } from '../Field';
-import { WidgetBodyWrapper, WidgetIcon, WidgetTitle, WidgetWrapper } from './components';
+import {
+    FaucetWidgetButton,
+    WidgetBodyWrapper,
+    WidgetIcon,
+    WidgetTitle,
+    WidgetWrapper,
+} from './components';
 import { SelectToken } from '../SelectToken';
 import { tokens, Tokens } from './types';
 
 export function FaucetWidget() {
     const [token, setToken] = useState<Tokens>();
 
-    const buttonText = !token ? 'Select a token' : 'Send';
     const { address } = useAccount();
+
+    const handleClick = async () => {
+        try {
+            if (!address) return;
+
+            const { wait } = await accessFaucet({
+                mnemonic: config.faucet,
+                to: address,
+                addressOrName: config.contract.Grogu,
+                amount: '10',
+            });
+
+            await wait();
+
+            // TODO: Add modal
+            console.log("You've received 10 tokens");
+        } catch (error: any) {
+            // TODO: Add toast
+            console.error(error.message || error);
+        }
+    };
 
     return (
         <WidgetWrapper>
@@ -25,9 +52,7 @@ export function FaucetWidget() {
 
                 <Field label="Wallet address" value={address} isDisabled />
             </WidgetBodyWrapper>
-            <Button variant="purple" isDisabled={buttonText !== 'Send'} onClick={() => {}}>
-                {buttonText}
-            </Button>
+            <FaucetWidgetButton onClick={handleClick} token={token} />
         </WidgetWrapper>
     );
 }

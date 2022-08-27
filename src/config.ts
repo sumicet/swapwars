@@ -10,4 +10,5 @@ export const config = {
             metamask: 'https://metamask.io/download/',
         },
     },
+    faucet: import.meta.env.VITE_FAUCET_SECRET_RECOVERY_PHRASE,
 };

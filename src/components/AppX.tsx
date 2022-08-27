@@ -1,4 +1,5 @@
 import { BigNumber, ethers } from 'ethers';
+import { getContract } from 'src/web3';
 
 const PPM = 1000000;
 const decimals = BigNumber.from(18);
@@ -9,8 +10,6 @@ const useContract = (name: string) => {
 };
 
 function AppX() {
-    const getContract = useContract();
-
     const tryMint = async () => {
         const Grogu = await getContract('Grogu');
         const Mando = await getContract('Mando');

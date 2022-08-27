@@ -3,3 +3,4 @@ export * from './utils';
 export * from './types';
 export * from './client';
 export * from './connectors';
+export * from './abis';

@@ -3,8 +3,8 @@ import { useCallback } from 'react';
 import { useAccount } from 'wagmi';
 import { chain, fetchBalance } from '@wagmi/core';
 import { BigNumber, ethers } from 'ethers';
-import { DECIMALS_BN, DECIMALS_BN_BIG, PPM } from '../../config/constants';
-import { useContract } from './useContract';
+import { DECIMALS_BN, PPM } from '../../config/constants';
+import { readContract, writeContract } from '../utils/contract';
 import { Token } from '../types';
 import { config } from '../../config';
 
@@ -18,7 +18,6 @@ export function useSwap({
     tokenOut: Exclude<Token, 'Matic'>;
 }) {
     const { address } = useAccount();
-    const { writeContract, readContract } = useContract();
 
     const swap = useCallback(async () => {
         try {
@@ -71,7 +70,7 @@ export function useSwap({
         } catch (error: any) {
             console.error(error.message || error);
         }
-    }, [address, amount, readContract, tokenIn, tokenOut, writeContract]);
+    }, [address, amount, tokenIn, tokenOut]);
 
     return swap;
 }

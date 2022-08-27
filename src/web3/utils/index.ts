@@ -1,2 +1,4 @@
 export * from './installWallet';
-export * from './getEventsFromHash';
+export * from './accessFaucet';
+export * from './contract';
+export * from '../hooks/useTokenBalance';

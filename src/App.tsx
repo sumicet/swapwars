@@ -3,12 +3,9 @@ import { Center, Container } from '@chakra-ui/layout';
 import { useColorModeValue } from '@chakra-ui/system';
 import { useEffect } from 'react';
 import { useAccount, useTransaction } from 'wagmi';
-import { getEventsFromHash } from 'events-from-hash';
 import { Home } from './pages/Home';
 import { Menu } from './components';
-import { useContract, useEagerConnect, usePersistNetwork } from './web3';
-import tokenSwapAbi from './web3/abis/TokenSwap.json';
-import { config } from './config';
+import { useEagerConnect, usePersistNetwork } from './web3';
 
 function App() {
     const bgColor = useColorModeValue('light.bg.primary', 'dark.bg.primary');
@@ -22,7 +19,7 @@ function App() {
 
     const { address } = useAccount();
 
-    const { getContract } = useContract();
+    // const { getContract } = useContract();
     useEffect(() => {
         if (!data || !address) {
             return;
@@ -64,22 +61,23 @@ function App() {
         //     console.log(error);
         // }
 
-        const init = async () => {
-            try {
-                const events = await getEventsFromHash({
-                    name: 'TokenBought',
-                    addressOrName: config.contract.TokenSwap,
-                    contractInterface: tokenSwapAbi,
-                    args: [address],
-                    hash: '0xfbbcdac225c82de12e796cd79b728c65146ec067e1c67da656f5dda89c407b4c',
-                });
-                console.log(events);
-            } catch (error) {
-                console.log('error', error);
-            }
-        };
-        init();
-    }, [address, data, getContract]);
+        // test function
+
+        // const init = async () => {
+        //     try {
+        //         const events = await getEventsFromHash({
+        //             name: 'TokenBought',
+        //             addressOrName: config.contract.TokenSwap,
+        //             contractInterface: tokenSwapAbi,
+        //             args: [address],
+        //             hash: '0xfbbcdac225c82de12e796cd79b728c65146ec067e1c67da656f5dda89c407b4c',
+        //         });
+        //         console.log(events);
+        //     } catch (error) {
+        //         console.log('error', error);
+        //     }
+        // };
+    }, [address, data]);
 
     return (
         <Center width="100%" bg={bgColor} flexDirection="column">
