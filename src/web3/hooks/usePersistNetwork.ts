@@ -18,8 +18,7 @@ export function usePersistNetwork() {
         if (network?.unsupported) {
             disconnect();
         }
-
         // TODO: Add toast
-        switchNetworkAsync?.(chain.polygonMumbai.id).catch((error) => console.error(error));
+        switchNetworkAsync?.(chain.goerli.id).catch((error) => console.error(error));
     }, [disconnect, isConnected, network, switchNetworkAsync]);
 }

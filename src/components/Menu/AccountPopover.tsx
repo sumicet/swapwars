@@ -29,7 +29,7 @@ const TokenImages: Balances = {
 export function AccountPopover({ children }: { children: ReactNode }) {
     const { address } = useAccount();
     const { disconnect, isLoading } = useDisconnect();
-    const useBalanceArgs = { addressOrName: address, watch: true, chainId: chain.polygonMumbai.id };
+    const useBalanceArgs = { addressOrName: address, watch: true, chainId: chain.goerli.id };
     const { data: groguData } = useBalance({
         ...useBalanceArgs,
         token: config.contract.Grogu,

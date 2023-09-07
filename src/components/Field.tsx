@@ -27,8 +27,8 @@ export function Field({ label, children, ...rest }: FieldProps) {
             </Text>
             <HStack
                 width='100%'
-                spacing='space30'
-                borderRadius='radius40'
+                spacing='space10'
+                borderRadius='radius14'
                 bg={bgColor}
                 {...bgOutline}
                 _groupHover={{
@@ -36,21 +36,22 @@ export function Field({ label, children, ...rest }: FieldProps) {
                 }}
                 _focusVisible={{ bg: bgHover }}
             >
-                {children && (
-                    <Flex flex={1}>
-                        <Flex paddingLeft='space10' width='100%'>
-                            {children}
-                        </Flex>
-                    </Flex>
-                )}
-                <Flex flex={1} height='100%'>
+                <Flex flex={3} height='100%' width='70%'>
                     <Input
                         variant={children ? 'halfRound' : undefined}
-                        textAlign='end'
+                        textAlign='start'
                         width='100%'
                         {...rest}
                     />
                 </Flex>
+                {children && (
+                    <Flex flex={1}>
+                        <Flex paddingLeft='space0' height='100%' width='100%' paddingRight='space10'>
+                            {children}
+                        </Flex>
+                    </Flex>
+                )}
+                
             </HStack>
         </VStack>
     );

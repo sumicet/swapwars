@@ -6,7 +6,7 @@ export function useTokenBalance(token: FetchBalanceArgs['token']) {
 
     const { data, isError, isLoading } = useBalance({
         addressOrName: token ? address : undefined, // BUG: enabled doesn't work https://github.com/wagmi-dev/wagmi/issues/888
-        chainId: chain.polygonMumbai.id,
+        chainId: chain.goerli.id,
         token,
         watch: !!token,
     });

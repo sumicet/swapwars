@@ -7,6 +7,7 @@ export type Tokens = {
     label: string;
     value: string;
     image: string;
+    address: string;
 } | null;
 
 export interface Amount {
@@ -16,18 +17,33 @@ export interface Amount {
 
 export const tokens: Tokens[] = [
     {
-        label: 'GROGU',
+        label: 'USDC',
         value: config.contract.Grogu,
         image: grogu,
+        address: '0x07865c6E87B9F70255377e024ace6630C1Eaa37F'
     },
     {
-        label: 'MANDO',
+        label: 'DAI',
         value: config.contract.Mando,
         image: mando,
+        address:'0x2899a03ffDab5C90BADc5920b4f53B0884EB13cC'
+    },
+];
+export type Networks = {
+    label :string;
+    value:string;
+    image:string;
+} | null;
+
+export const networks: Networks[] = [
+    {
+        label: 'Ethereum',
+        value: 'Ethereum',
+        image: jawa,
     },
     {
-        label: 'JAWA',
-        value: 'JAWA',
-        image: jawa,
+        label: 'Solana',
+        value: 'Solana',
+        image: mando,
     },
 ];

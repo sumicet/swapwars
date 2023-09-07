@@ -12,7 +12,7 @@ export function useConnect() {
         ...rest
     } = useWagmiConnect({
         connector: injectedConnector,
-        chainId: chain.polygonMumbai.id,
+        chainId: chain.goerli.id,
     });
 
     const connect = async () => {

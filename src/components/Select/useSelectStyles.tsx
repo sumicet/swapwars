@@ -21,7 +21,7 @@ export function useSelectStyles<
         control: (provider, state) => ({
             ...provider,
             ...style.control,
-            borderBottomRadius: state.menuIsOpen ? 0 : 'radius29',
+            borderBottomRadius: state.menuIsOpen ? 0 : 'radius7',
             borderColor: state.menuIsOpen ? 'dark.bg.border' : 'transparent',
         }),
     };
