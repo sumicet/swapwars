@@ -17,7 +17,7 @@ export function Menu() {
         <HStack spacing="space10" width="100%" padding="space20" align="center">
             <Image src={logo} boxSize="30px" objectFit="contain" />
             <Text variant="extraLarge" color={textColor}>
-                Swapwars
+                DAI
             </Text>
             <HStack spacing="space20" flex={1} alignItems="center" justifyContent="flex-end">
                 <Web3Button />

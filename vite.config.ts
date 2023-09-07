@@ -16,6 +16,7 @@ export default defineConfig({
         alias: [
             {
                 find: 'src',
+                process: "process/browser",
                 replacement: path.resolve(__dirname, './src'),
             },
         ],

@@ -13,7 +13,7 @@ export function WidgetIcon({ icon, rotateIcon, ...rest }: WidgetIconProps) {
                 position='absolute'
                 left='50%'
                 // TODO Find a better way to get the label height (19px)
-                transform={`translateX(-50%) translateY(calc(-50% + (${labelInputSpace} + 19px) / 2))`}
+                transform={` translateY(calc(-50% + (${labelInputSpace} + 19px) / 2))`}
             >
                 <Polygon icon={icon} rotateIcon={rotateIcon} />
             </Box>

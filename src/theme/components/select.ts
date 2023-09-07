@@ -16,7 +16,7 @@ export const Select: ComponentStyleConfig = {
         control: {
             height: '100%',
             width: '100%',
-            borderRadius: 'radius29',
+            borderRadius: 'radius7',
             bg: mode('light.bg.primary', 'dark.bg.tertiary')(props),
             _groupHover: {
                 bg: mode('light.bg.secondary', 'dark.bg.hover.tertiary')(props),
@@ -32,7 +32,7 @@ export const Select: ComponentStyleConfig = {
             _groupHover: {
                 color: mode('light.secondary', 'dark.secondary')(props),
             },
-            borderBottomRadius: 'radius29',
+            borderBottomRadius: 'radius7',
             outline: mode('1px solid', 'none')(props),
             outlineColor: mode('light.bg.primary', 'transparent')(props),
         },
