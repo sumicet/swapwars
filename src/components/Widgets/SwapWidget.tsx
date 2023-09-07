@@ -2,6 +2,7 @@ import { Grid, GridItem, Spacer } from '@chakra-ui/layout'
 import { Box,Flex } from '@chakra-ui/layout'
 import { ChangeEvent, useEffect, useState } from 'react';
 import { FiRepeat } from 'react-icons/fi';
+import { Ethereum,Solana } from 'iconsax-react'
 import { Field } from '../Field';
 import { IERC20, BridgeABI,BridgeAddress } from '../../config/constants'
 import { BigNumber, ethers } from 'ethers';
@@ -16,8 +17,9 @@ import { SelectToken } from '../SelectToken';
 import { Amount, tokens, Tokens,networks,Networks } from './types';
 import { radii } from 'src/theme/foundations/radii';
 import { Button } from '@chakra-ui/button';
-
+import { useDispatch } from 'react-redux'
 export function SwapWidget() {
+    const dispatch = useDispatch();
     const [amount, setAmount] = useState<Amount>({ in: '', out: '' });
     const [recevieAddress, setReceiveAddres] = useState<string>('');
     const handleChange = (field: 'in' | 'out' | 'addr', event: ChangeEvent<HTMLInputElement>) => {
@@ -54,6 +56,9 @@ export function SwapWidget() {
         console.log(am);
         setAmount({in:am,out:String(parseFloat(am) *0.995)});
     }
+    useEffect(()=>{
+        dispatch({ type: 'NETWORK', payload: network?.value });
+    },[network])
     return (
         <WidgetWrapper>
             <WidgetTitle title="Transfer"  subtitle=''/>

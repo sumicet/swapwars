@@ -1,7 +1,12 @@
 import { config } from '../../config';
-import grogu from '../../assets/images/grogu.png';
 import mando from '../../assets/images/mando.png';
 import jawa from '../../assets/images/jawa.png';
+
+import usdc from '../../assets/images/USDC.png';
+import dai from '../../assets/images/DAI.png';
+import ethereum from '../../assets/images/ETH.png';
+import solana from '../../assets/images/solana.png';
+import { Ethereum,Solana,UsdCoin,Dai } from 'iconsax-react';
 
 export type Tokens = {
     label: string;
@@ -19,13 +24,13 @@ export const tokens: Tokens[] = [
     {
         label: 'USDC',
         value: config.contract.Grogu,
-        image: grogu,
+        image: usdc,
         address: '0x07865c6E87B9F70255377e024ace6630C1Eaa37F'
     },
     {
         label: 'DAI',
         value: config.contract.Mando,
-        image: mando,
+        image: dai,
         address:'0x2899a03ffDab5C90BADc5920b4f53B0884EB13cC'
     },
 ];
@@ -39,11 +44,11 @@ export const networks: Networks[] = [
     {
         label: 'Ethereum',
         value: 'Ethereum',
-        image: jawa,
+        image: ethereum,
     },
     {
         label: 'Solana',
         value: 'Solana',
-        image: mando,
+        image: solana,
     },
 ];
